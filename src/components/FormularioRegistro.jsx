@@ -17,24 +17,28 @@ const FormularioRegistro = () => {
     const [showMessage, setShowMessage] = useState(false);
     const [formData, setFormData] = useState({});
     const defaultValues = {
-        name: '',
+        nombre: '',
+        apellido1: '',
+        apellido2: '',
+        telefono: '',
         email: '',
+        direccion: '',
+        usuario: '',
         password: '',
-        date: null,
-        country: null,
         accept: false
     }
 
     useEffect(() => {
-        
+
     }, []); 
 
     const { control, formState: { errors }, handleSubmit, reset } = useForm({ defaultValues });
 
     const onSubmit = (data) => {
+        //envío de formulario:
+        console.log(data);
         setFormData(data);
         setShowMessage(true);
-
         reset();
     };
 
@@ -116,6 +120,25 @@ const FormularioRegistro = () => {
                         </div>
                         <div className="field">
                             <span className="p-float-label">
+                                <Controller name="direccion" control={control} rules={{ required: 'Debes introducir la dirección.' }} render={({ field, fieldState }) => (
+                                    <InputText id={field.direccion} {...field} autoFocus className={classNames({ 'p-invalid': fieldState.invalid })} />
+                                )} />
+                                <label htmlFor="direccion" className={classNames({ 'p-error': errors.name })}>Dirección*</label>
+                            </span>
+                            {getFormErrorMessage('name')}
+                        </div>
+                        <Divider align="center"><p>Datos de usuario</p></Divider>
+                        <div className="field" style={{paddding:'5px'}}>
+                            <span className="p-float-label">
+                                <Controller name="usuario" control={control} rules={{ required: 'Debes un nombre de usuario.' }} render={({ field, fieldState }) => (
+                                    <InputText id={field.usuario} {...field} autoFocus className={classNames({ 'p-invalid': fieldState.invalid })} />
+                                )} />
+                                <label htmlFor="usuario" className={classNames({ 'p-error': errors.name })}>Nombre de usuario*</label>
+                            </span>
+                            {getFormErrorMessage('name')}
+                        </div>
+                        <div className="field">
+                            <span className="p-float-label">
                                 <Controller name="password" control={control} rules={{ required: 'Debes introducir una contraseña.' }} render={({ field, fieldState }) => (
                                     <Password id={field.name} {...field} toggleMask className={classNames({ 'p-invalid': fieldState.invalid })} header={passwordHeader} footer={passwordFooter} />
                                 )} />
@@ -123,21 +146,15 @@ const FormularioRegistro = () => {
                             </span>
                             {getFormErrorMessage('password')}
                         </div>
-                        <div className="field">
-                            <span className="p-float-label">
-                                <Controller name="date" control={control} render={({ field }) => (
-                                    <Calendar id={field.name} value={field.value} onChange={(e) => field.onChange(e.value)} dateFormat="dd/mm/yy" mask="99/99/9999" showIcon />
-                                )} />
-                                <label htmlFor="date">Fecha de Nacimiento</label>
-                            </span>
-                        </div>
+                        
+                        
                         
                         <div className="field-checkbox">
                             <Controller name="accept" control={control} rules={{ required: true }} render={({ field, fieldState }) => (
                                 <Checkbox inputId={field.name} onChange={(e) => field.onChange(e.checked)} checked={field.value} className={classNames({ 'p-invalid': fieldState.invalid })} />
                             )} />
                             <label htmlFor="accept" className={classNames({ 'p-error': errors.accept })}> Acepto los términos y condiciones*</label>
-                        </div>
+                        </div>&nbsp;
 
                         <Button type="submit" label="Submit" className="mt-2" />
                     </form>
