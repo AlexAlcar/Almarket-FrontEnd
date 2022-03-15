@@ -5,7 +5,7 @@ import './App.css';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import FormularioRegistro from './components/FormularioRegistro';
 import Principal from "./components/Principal";
-import ListaImpresores from "./components/ListaImpresores";
+import ListaImpresores from "./components/ListaImpresores/ListaImpresores";
 import DatosUsuario from "./components/DatosUsuario";
 import PantallaInicial from "./components/PantallaInicial";
 import NuevoPedido from "./components/NuevoPedido";
