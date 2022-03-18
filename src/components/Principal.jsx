@@ -1,6 +1,7 @@
 import { Card } from 'primereact/card';
 import { Splitter, SplitterPanel } from 'primereact/splitter';
-import MenuLateral from "./MenuLateral";
+import Cabecera from './Cabecera/Cabecera';
+import MenuLateral from "./MenuLateral/MenuLateral";
 
 const Principal =({children})=>{
 
@@ -9,7 +10,7 @@ const Principal =({children})=>{
         <SplitterPanel size={92} minSize={92}>
           <Splitter layout="vertical">
             <SplitterPanel className="flex align-items-center justify-content-center" size={8} minSize={8} maxSize={8} >
-              Cabecera
+              <Cabecera />
             </SplitterPanel>
             <SplitterPanel size={92} minSize={92} maxSize={92}>
               <Splitter>

@@ -1,5 +1,4 @@
 import "primeicons/primeicons.css";
-import "primereact/resources/themes/lara-light-teal/theme.css"; 
 import "primereact/resources/primereact.css";
 import { PanelMenu } from 'primereact/panelmenu';
 import { Menu, } from 'primereact/menu';
