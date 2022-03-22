@@ -105,7 +105,7 @@ const ListaImpresores = () => {
     return (
         <div className="card">
             
-            <Sidebar visible={verNuevoPedido} onHide={()=>{setverNuevoPedido(false)}}>
+            <Sidebar visible={verNuevoPedido} position="top" style={{height:'50%'}} onHide={()=>{setverNuevoPedido(false)}}>
                 <NuevoPedido/>
             </Sidebar>
 

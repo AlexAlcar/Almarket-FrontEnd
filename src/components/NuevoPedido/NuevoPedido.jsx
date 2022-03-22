@@ -15,7 +15,7 @@ import { addLocale } from 'primereact/api';
 import { Chip } from 'primereact/chip';
 import { Card } from "primereact/card";
 
-const NuevoPedido=({verNuevoPedido})=>{
+const NuevoPedido = ({ verNuevoPedido }) => {
     const [nuevoPedido, setNuevoPedido] = useState({
         id_usuario: null,
         id_impresor: null,
@@ -26,7 +26,7 @@ const NuevoPedido=({verNuevoPedido})=>{
         estado: null,
         color: null,
     });
-    const [visibilidad,setVisibilidad] = useState(verNuevoPedido);
+    const [visibilidad, setVisibilidad] = useState(verNuevoPedido);
     addLocale('es', {
         firstDayOfWeek: 1,
         dayNames: ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'],
@@ -37,38 +37,40 @@ const NuevoPedido=({verNuevoPedido})=>{
         today: 'Hoy',
         clear: 'Claro'
     });
-    return(
-        <Card className="p-sidebar-lg" position="top" style={{ height: '50%' }} onHide={() => setVisibilidad(false)}>
-                <div className="card" >
+    return (
+        <div style={{display:'grid', gridAutoFlow:'column', alignItems:'center', justifyItems:'center' }}>
+            <Card style={{ width: '60rem', paddingRight: '5%', paddingLeft: '5%'}} className="p-sidebar-lg" onHide={() => setVisibilidad(false)}>
+                <div className="card">
                     <div className="p-fluid formgrid grid">
-                        <h2>Crear un nuevo pedido para</h2>
-                        <div className="field col-12 md:col-4">
+                        <h1>Crear un nuevo pedido</h1>
+                        <div >
                             <label>Color</label><br />
-                            <InputText style={{width:'50%'}}id="color" ></InputText>
+                            <InputText id="color" ></InputText>
                             <br /><br />
                         </div>
-                        <div className="field col-12 md:col-4">
+                        <div >
                             <label htmlFor="date">Cantidad</label><br />
-                            <InputNumber style={{width:'50%'}} inputId="minmax-buttons" mode="decimal" showButtons min={1} max={999} />
+                            <InputNumber inputId="minmax-buttons" mode="decimal" showButtons min={1} max={999} />
                             <br /><br />
                         </div>
-                        <div className="field col-12 md:col-4">
+                        <div >
                             <label htmlFor="date">Material</label>
-                            <Dropdown style={{width:'50%'}} optionLabel="name" options={[
+                            <Dropdown  optionLabel="name" options={[
                                 { name: 'PLA', code: 'PLA' },
                                 { name: 'PETG', code: 'PET' },
                                 { name: 'Filaflex', code: 'FFL' },
                                 { name: 'ABS', code: 'ABS' },
                             ]} /><br />
                         </div>
-                        <div className="field col-12 md:col-4">
-                            <label htmlFor="date">Material</label>
-                            <Calendar style={{width:'50%'}} id="spanish" onChange={(e) => setNuevoPedido({ ...nuevoPedido, fecha_entrega: e.value })} locale="es" dateFormat="dd/mm/yy" />
+                        <div>
+                            <label htmlFor="date">Fecha</label>
+                            <Calendar style={{ width: '60%' }} id="spanish" onChange={(e) => setNuevoPedido({ ...nuevoPedido, fecha_entrega: e.value })} locale="es" dateFormat="dd/mm/yy" />
                         </div>
 
                     </div>
                 </div>
             </Card>
+        </div>
     )
 }
 export default NuevoPedido;
