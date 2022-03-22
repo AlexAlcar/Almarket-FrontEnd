@@ -7,7 +7,7 @@ import {
   BrowserRouter,
   Routes,
   Route,
-  Redirect
+  Navigate,
 } from "react-router-dom";
 import FormularioRegistro from './components/FormularioRegistro/FormularioRegistro';
 import Principal from "./components/Principal";
@@ -18,26 +18,40 @@ import NuevoPedido from "./components/NuevoPedido/NuevoPedido";
 import MisPedidos from "./components/MisPedidos/MisPedidos";
 import Ayuda from "./components/Ayuda/Ayuda";
 import Login from "./components/Login/Login";
+import PrivateRoute from "./Helpers/PrivateRoute";
+
 
 
 function App() {
-  const [user, setUser]=useState(true);
+  const [authorized, setAuthorized]=useState(false);
 
+
+  useEffect(() => {
+    if(document.cookie)
+    {
+      //No solo hay que comprobar que haya cookie, también que los datos sean válidos (evitar falseo copiando cookie)
+      setAuthorized(true);
+    }
+}, [authorized]);
 
   return (
     <BrowserRouter>
-    <Principal>
-      <Routes>{/*Switch*/}
-          <Route exact path="/" element={<PantallaInicial />} />
-          <Route exact path="ListaImpresores" element={<ListaImpresores/>} />
-          <Route exact path="MisPedidos" element={<MisPedidos/>} />
-          <Route exact path="Ayuda" element={<Ayuda/>} />
-          <Route exact path="NuevoPedido" element={<NuevoPedido />} />
-          <Route exact path="DatosUsuario" element={<DatosUsuario/>} />
-          <Route exact path="FormularioRegistro" element={<FormularioRegistro/>} />
-          <Route render={() => <h1>Not found!</h1>} />
-      </Routes>
-    </Principal>
+    {
+      authorized?(
+      <Principal>
+        <Routes>{/*Switch*/}
+            
+            <Route exact path="/" element={<PantallaInicial />} />
+            <Route exact path="ListaImpresores" element={<ListaImpresores />} />
+            <Route exact path="MisPedidos" element={<MisPedidos />} />
+            <Route exact path="Ayuda" element={<Ayuda />} />
+            <Route exact path="NuevoPedido" element={<NuevoPedido />} />
+            <Route exact path="DatosUsuario" element={<DatosUsuario />} />
+            <Route render={() => <h1>Not found!</h1>} />
+        </Routes>
+      </Principal>
+      ):<Login authorized={authorized} setAuthorized={setAuthorized}/>
+}
     </BrowserRouter>
   );
 }

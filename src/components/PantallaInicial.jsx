@@ -1,7 +1,10 @@
-const PantallaInicial=()=>{
+import { Navigate } from "react-router";
 
+const PantallaInicial=({authorized})=>{
+
+ 
     return(
-        <h1>Pantalla inicial</h1>
+           <p>Si estas aquí es que todo va bien</p>
         
     )
 }

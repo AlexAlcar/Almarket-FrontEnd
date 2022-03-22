@@ -15,7 +15,7 @@ import { addLocale } from 'primereact/api';
 import { Chip } from 'primereact/chip';
 import NuevoPedido from "../NuevoPedido/NuevoPedido";
 
-const ListaImpresores = () => {
+const ListaImpresores = ({authorized}) => {
     const [impresores, setImpresores] = useState([]);
     const [loading, setLoading] = useState(true);
     const [verNuevoPedido, setverNuevoPedido] = useState(false);
@@ -96,6 +96,7 @@ const ListaImpresores = () => {
     }
     useEffect(() => {
         getListaImpresores();
+        console.log("authorized:", authorized)
     }, []);
 
     useEffect(()=>{

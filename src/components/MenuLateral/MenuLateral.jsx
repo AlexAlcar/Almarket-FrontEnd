@@ -1,6 +1,9 @@
 import "primeicons/primeicons.css";
 import "primereact/resources/primereact.css";
 import { PanelMenu } from 'primereact/panelmenu';
+import { ConfirmDialog, confirmDialog } from 'primereact/confirmdialog';
+import { Toast } from 'primereact/toast';
+
 import { Menu, } from 'primereact/menu';
 import { Link } from "react-router-dom";
 import { Button } from 'primereact/button';
@@ -51,7 +54,16 @@ const MenuLateral =()=>{
 
             {
               label: "Cerrar Sesión",
-              icon: "pi pi-times"
+              icon: "pi pi-times",
+              command: () => {
+                confirmDialog({
+                  message: '¿Seguro que deseas cerrar sesión?',
+                  header: 'Cerrar Sesión',
+                  icon: 'pi pi-exclamation-triangle',
+                  accept,
+                  reject
+              });
+            }
             }
           ]
         },
@@ -75,6 +87,16 @@ const MenuLateral =()=>{
           ]
         }
       ];
+
+      const accept = () => {
+        console.log("accept");
+        document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+        document.cookie = "_id=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+        window.location.reload(false);
+    }
+    const reject = () => {
+      Toast.currents.show({ severity: 'info', summary: 'Rejected', detail: 'You have rejected', life: 3000 });
+  }
     return(
         <>
         <Menu model={items} style={{}} />
