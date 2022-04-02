@@ -42,7 +42,7 @@ const NuevoPedido = ({ verNuevoPedido }) => {
             <Card style={{ width: '60rem', paddingRight: '5%', paddingLeft: '5%'}} className="p-sidebar-lg" onHide={() => setVisibilidad(false)}>
                 <div className="card">
                     <div className="p-fluid formgrid grid">
-                        <h1>Crear un nuevo pedido</h1>
+                        
                         <div >
                             <label>Color</label><br />
                             <InputText id="color" ></InputText>

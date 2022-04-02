@@ -5,6 +5,8 @@ import { InputText } from 'primereact/inputtext';
 import { Button } from 'primereact/button';
 import { Card } from 'primereact/card';
 import { Dropdown } from 'primereact/dropdown';
+import { InputNumber } from 'primereact/inputnumber';
+import { InputMask } from 'primereact/inputmask';
 import { Password } from 'primereact/password';
 import { Checkbox } from 'primereact/checkbox';
 import { Dialog } from 'primereact/dialog';
@@ -13,7 +15,7 @@ import { classNames } from 'primereact/utils';
 import './FormularioRegistro.css';
 
 
-const FormularioRegistro = () => {
+const FormularioRegistro = ({setDisplayRegister}) => {
 
     const [showMessage, setShowMessage] = useState(false);
     const [formData, setFormData] = useState({});
@@ -41,6 +43,7 @@ const FormularioRegistro = () => {
         setFormData(data);
         setShowMessage(true);
         reset();
+        setDisplayRegister(false)
     };
 
     const getFormErrorMessage = (name) => {
@@ -109,6 +112,17 @@ const FormularioRegistro = () => {
                                 </span>
                                 {getFormErrorMessage('name')}
                             </div>
+
+                            <div className="field">
+                                <span className="p-float-label">
+                                    <Controller name="telefono" control={control} render={({ field, fieldState }) => (
+                                        <InputMask id={field.name} {...field} mask="999999999"  autoFocus className={classNames({ 'p-invalid': fieldState.invalid })} />
+                                    )} />
+                                    <label htmlFor="telefono" className={classNames({ 'p-error': errors.name })}>Teléfono</label>
+                                </span>
+                                {getFormErrorMessage('name')}
+                            </div>
+
                             <div className="field">
                                 <span className="p-float-label p-input-icon-right">
                                     <i className="pi pi-envelope" />

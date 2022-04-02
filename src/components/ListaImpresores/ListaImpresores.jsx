@@ -5,7 +5,7 @@ import { Column } from 'primereact/column';
 import { Rating } from 'primereact/rating';
 import { Button } from 'primereact/button';
 import { Toast } from 'primereact/toast';
-import { Sidebar } from 'primereact/sidebar';
+import { Dialog } from 'primereact/dialog';
 import { Dropdown } from 'primereact/dropdown';
 import { confirmDialog } from 'primereact/confirmdialog';
 import { InputNumber } from 'primereact/inputnumber';
@@ -70,9 +70,9 @@ const ListaImpresores = ({authorized}) => {
                         icon: 'pi pi-info-circle',
                         accept: () => {
                             setLoading(true);
-                            setverNuevoPedido(true);
-                            setLoading(false);
-                            setImpresorElegido({
+                            
+                            //setLoading(false);
+                            setImpresorElegido({...impresorElegido,
                                 apellido1: rowData.apellido1,
                                 apellido2: rowData.apellido2,
                                 email: rowData.email,
@@ -80,12 +80,14 @@ const ListaImpresores = ({authorized}) => {
                                 materiales: rowData.materiales,
                                 nombre: rowData.nombre,
                                 password: rowData.password,
-                                puntuacion: null,
+                                puntuacion: rowData.puntuacion,
                                 telefono: null,
-                                usuario: null,
+                                usuario: rowData.usuario,
                                 valoraciones: null,
-                                _id: null
-                            })
+                                _id: rowData._id,
+                            });
+                            console.log(impresorElegido.usuario);
+                            setverNuevoPedido(true);
 
                         }
                     });;
@@ -93,10 +95,20 @@ const ListaImpresores = ({authorized}) => {
                 }
             />
         )
+    };
+    
+    const renderFooter = (name) => {
+        return (
+            <div>
+                <Button label="No" icon="pi pi-times"  className="p-button-text" onClick={()=>setverNuevoPedido(false)}/>
+                <Button label="Yes" icon="pi pi-check"  autoFocus />
+            </div>
+        );
     }
+
     useEffect(() => {
         getListaImpresores();
-        console.log("authorized:", authorized)
+        //console.log("authorized:", authorized)
     }, []);
 
     useEffect(()=>{
@@ -105,10 +117,10 @@ const ListaImpresores = ({authorized}) => {
 
     return (
         <div className="card">
-            
-            <Sidebar visible={verNuevoPedido} position="top" style={{height:'50%'}} onHide={()=>{setverNuevoPedido(false)}}>
-                <NuevoPedido/>
-            </Sidebar>
+            <Dialog header={"Crear nuevo pedido a "+impresorElegido.usuario} visible={verNuevoPedido} onHide={() =>setverNuevoPedido(false)} breakpoints={{'960px': '75vw'}} style={{width: 'auto'}} footer={renderFooter('displayResponsive')}>
+            <NuevoPedido/>
+            </Dialog>
+
 
             <Toast ref={toast} />
             <DataTable value={impresores} datakey='_id' header="Lista completa de impresores" responsiveLayout="stack" paginator className="p-datatable-customers" rows={10}

@@ -18,7 +18,7 @@ import NuevoPedido from "./components/NuevoPedido/NuevoPedido";
 import MisPedidos from "./components/MisPedidos/MisPedidos";
 import Ayuda from "./components/Ayuda/Ayuda";
 import Login from "./components/Login/Login";
-import PrivateRoute from "./Helpers/PrivateRoute";
+//import PrivateRoute from "./Helpers/PrivateRoute";
 
 
 
