@@ -87,9 +87,7 @@ const Login = ({ authorized, setAuthorized }) => {
                                         </span>
                                         {getFormErrorMessage('password')}
                                     </div>
-                                    <p>Tipo de usuario:</p> 
-                                    <ToggleButton checked={tipoUsuario}  onChange={(e) => setTipoUsuario(!tipoUsuario)} onLabel="Usuario" offLabel="Impresor" style={{width: '10em'}} />
-                                    <br/> <br/>
+
                                     <Button label="Login" className="mt-2" onClick={() => checkLogin()} />
                                     <p>¿No tienes cuenta? </p> <Button label="Regístrate" className="mt-2" style={{ width: '12%', height: "9%" }} onClick={() => setDisplayRegister(true)} />
                                     <Dialog visible={displayRegister} onHide={() => setDisplayRegister(false)}>

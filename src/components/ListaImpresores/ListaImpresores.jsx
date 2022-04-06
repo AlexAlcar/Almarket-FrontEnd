@@ -23,8 +23,11 @@ const ListaImpresores = ({authorized}) => {
         apellido1: null,
         apellido2: null,
         email: null,
+        direccion:null,
         impresoras: null,
-        materiales: null,
+        tamanyo: null,
+        perfil: null,
+        precio: null,
         nombre: null,
         password: null,
         puntuacion: null,
@@ -38,7 +41,7 @@ const ListaImpresores = ({authorized}) => {
     const toast = useRef(null);
 
     const getListaImpresores = async () => {
-        const dataSource = await Http.get("/api/impresores");
+        const dataSource = await Http.get("/api/usuarios/getImpresores");
         console.log(dataSource);
         setImpresores(dataSource);
     }
@@ -46,6 +49,13 @@ const ListaImpresores = ({authorized}) => {
     const ratingTemplate = (rowData) => {
         return <Rating value={parseInt(rowData.puntuacion)} readOnly cancel={false} />
     }
+    const priceBodyTemplate = (rowData) => {
+        return rowData.precio+" €/ud";
+    }
+    const tamanyoTemplate = (rowData) => {
+        return rowData.precio+" cm³";
+    }
+
 
     /*const nuevoPedido = (rowData) => {
         setverNuevoPedido(true)
@@ -73,15 +83,17 @@ const ListaImpresores = ({authorized}) => {
                             
                             //setLoading(false);
                             setImpresorElegido({...impresorElegido,
+                                nombre: rowData.nombre,
                                 apellido1: rowData.apellido1,
                                 apellido2: rowData.apellido2,
+                                telefono: null,
                                 email: rowData.email,
                                 impresoras: rowData.impresoras,
                                 materiales: rowData.materiales,
-                                nombre: rowData.nombre,
+                                tamanyo: rowData.tamanyo,
                                 password: rowData.password,
                                 puntuacion: rowData.puntuacion,
-                                telefono: null,
+                                precio: rowData.precio,
                                 usuario: rowData.usuario,
                                 valoraciones: null,
                                 _id: rowData._id,
@@ -127,9 +139,10 @@ const ListaImpresores = ({authorized}) => {
                 globalFilterFields={['usuario', 'nombre', 'apellido1']} filterDisplay="row" size="small" emptyMessage="No se ha encontrado ningún impresor."
             >
                 <Column field="usuario" header="Usuario" sortable filter filterPlaceholder="Buscar por nombre de usuario" className="p-inputtext-sm block mb-2" />
-                <Column field="nombre" header="Nombre" sortable filter filterPlaceholder="Buscar por nombre" className="p-inputtext-sm block mb-2" />
-                <Column field="apellido1" header="Apellido" sortable filter filterPlaceholder="Buscar por apellido" className="p-inputtext-sm block mb-2" />
+                
                 <Column field="impresoras" header="Impresoras" sortable />
+                <Column field="tamanyo" header="Tamaño máximo" body={tamanyoTemplate} sortable />
+                <Column field="precio" header="Precio" body={priceBodyTemplate} sortable />
                 <Column field="puntuacion" header="Puntuación" body={ratingTemplate} sortable />
                 <Column body={handleClickNuevoPedido} />
             </DataTable>
