@@ -7,15 +7,16 @@ import { Button } from 'primereact/button';
 import { Toast } from 'primereact/toast';
 import { Sidebar } from 'primereact/sidebar';
 import { Dropdown } from 'primereact/dropdown';
-import { confirmDialog } from 'primereact/confirmdialog';
+import { InputTextarea } from 'primereact/inputtextarea';
 import { InputNumber } from 'primereact/inputnumber';
 import { InputText } from 'primereact/inputtext';
 import { Calendar } from 'primereact/calendar';
 import { addLocale } from 'primereact/api';
-import { Chip } from 'primereact/chip';
+import { ColorPicker } from 'primereact/colorpicker';
 import { Card } from "primereact/card";
 
 const NuevoPedido = ({ verNuevoPedido }) => {
+    const [color, setColor] = useState('1976D2');
     const [nuevoPedido, setNuevoPedido] = useState({
         id_usuario: null,
         id_impresor: null,
@@ -44,8 +45,8 @@ const NuevoPedido = ({ verNuevoPedido }) => {
                     <div className="p-fluid formgrid grid">
                         
                         <div >
-                            <label>Color</label><br />
-                            <InputText id="color" ></InputText>
+                            <label>Descripción</label><br />
+                            <InputTextarea id="color" ></InputTextarea>
                             <br /><br />
                         </div>
                         <div >
@@ -65,6 +66,11 @@ const NuevoPedido = ({ verNuevoPedido }) => {
                         <div>
                             <label htmlFor="date">Fecha</label>
                             <Calendar style={{ width: '60%' }} id="spanish" onChange={(e) => setNuevoPedido({ ...nuevoPedido, fecha_entrega: e.value })} locale="es" dateFormat="dd/mm/yy" />
+                        </div>
+                        <div >
+                            <label>Color</label><br />
+                            <ColorPicker value={color} style={{width:'6%'}} onChange={(e) => setNuevoPedido({ ...nuevoPedido, color: e.value })} ></ColorPicker>
+                            <br /><br />
                         </div>
 
                     </div>

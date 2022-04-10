@@ -11,97 +11,97 @@ import "./MenuLateral.css";
 
 
 
-const MenuLateral =()=>{
-    const items = [
+const MenuLateral = () => {
+  const items = [
+    {
+      label: "Inicio",
+      icon: "pi pi-home",
+      url: "./"
+    },
+    {
+      label: "Servicios",
+      items: [
         {
-          label: "Inicio",
-          icon: "pi pi-home",
-          url: "./"
+          label: "Impresores",
+          icon: "pi pi-print",
+          url: "./ListaImpresores"
         },
         {
-          label: "Servicios",
-          items: [
-            {
-              label: "Impresores",
-              icon: "pi pi-print",
-              url: "./ListaImpresores"
-            },
-            {
-              label: "Nuevo pedido",
-              icon: "pi pi-plus",
-              url: "./NuevoPedido"
-            },
-            {
-                label: "Mis pedidos",
-                icon: "pi pi-list",
-                url: "./MisPedidos"
-              },
-          ]
+          label: "Nuevo pedido",
+          icon: "pi pi-plus",
+          url: "./NuevoPedido"
         },
         {
-          label: "Usuario",
-          items: [
-            {
-              label: "Mis datos",
-              icon: "pi pi-user",
-              url: "./DatosUsuario"
-            },
-            {
-              label: "Ayuda",
-              icon: "pi pi-question-circle",
-              url: "./Ayuda"
-            },
+          label: "Mis pedidos",
+          icon: "pi pi-list",
+          url: "./MisPedidos"
+        },
+      ]
+    },
+    {
+      label: "Usuario",
+      items: [
+        {
+          label: "Mis datos",
+          icon: "pi pi-user",
+          url: "./DatosUsuario"
+        },
+        {
+          label: "Ayuda",
+          icon: "pi pi-question-circle",
+          url: "./Ayuda"
+        },
 
-            {
-              label: "Cerrar Sesión",
-              icon: "pi pi-times",
-              command: () => {
-                confirmDialog({
-                  message: '¿Seguro que deseas cerrar sesión?',
-                  header: 'Cerrar Sesión',
-                  icon: 'pi pi-exclamation-triangle',
-                  accept,
-                  reject
-              });
-            }
-            }
-          ]
-        },
         {
-          label: "Otros",
-          icon: "pi pi-fw pi-user",
-          items: [
-            {
-              label: "Option 1",
-              icon: "pi pi-globe"
-            },
-            {
-              label: "Option 2",
-              icon: "pi pi-fw pi-user-minus"
-            },
-            {
-              label: "Formulario - Test",
-              icon: "pi pi-fw pi-users",
-              url: "./FormularioRegistro"
-            }
-          ]
+          label: "Cerrar Sesión",
+          icon: "pi pi-times",
+          command: () => {
+            confirmDialog({
+              message: '¿Seguro que deseas cerrar sesión?',
+              header: 'Cerrar Sesión',
+              icon: 'pi pi-exclamation-triangle',
+              accept,
+              reject
+            });
+          }
         }
-      ];
-
-      const accept = () => {
-        console.log("accept");
-        document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-        document.cookie = "_id=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-        window.location.reload(false);
+      ]
+    },
+    {
+      label: "Otros",
+      icon: "pi pi-fw pi-user",
+      items: [
+        {
+          label: "Option 1",
+          icon: "pi pi-globe"
+        },
+        {
+          label: "Option 2",
+          icon: "pi pi-fw pi-user-minus"
+        },
+        {
+          label: "Formulario - Test",
+          icon: "pi pi-fw pi-users",
+          url: "./FormularioRegistro"
+        }
+      ]
     }
-    const reject = () => {
-      Toast.currents.show({ severity: 'info', summary: 'Rejected', detail: 'You have rejected', life: 3000 });
+  ];
+
+  const accept = () => {
+    console.log("accept");
+    document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    document.cookie = "_id=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    window.location.reload(false);
   }
-    return(
-        <>
-        <Menu model={items} style={{}} />
-        
-        </>
-    )
+  const reject = () => {
+    //Toast.currents.show({ severity: 'info', summary: 'Rejected', detail: 'You have rejected', life: 3000 });
+  }
+  return (
+    <>
+      <Menu model={items} style={{}} />
+
+    </>
+  )
 }
 export default MenuLateral;

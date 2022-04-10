@@ -20,7 +20,7 @@ import FormularioRegistro from '../FormularioRegistro/FormularioRegistro';
 const Login = ({ authorized, setAuthorized }) => {
     const [username, setUsername] = useState();
     const [password, setPassword] = useState();
-    const [tipoUsuario, setTipoUsuario] = useState(true);
+    const [rolImpresor, setRolImpresor] = useState(false);
     const { control, formState: { errors }, handleSubmit, reset } = useForm();
     const [displayRegister, setDisplayRegister] = useState(false);
 
@@ -37,30 +37,22 @@ const Login = ({ authorized, setAuthorized }) => {
         const result = await Http.post(body, "/api/usuarios/login");
         //console.log("Respuesta: ", result);
         if (result) {
-            console.log("Login OK");
+            console.log(result.perfil);
+            result.perfil==="impresor"? setRolImpresor(true):setRolImpresor(false);
             document.cookie = "username=" + username;
             document.cookie = "_id=" + result;
-            document.cookie = "profile=user";
             setAuthorized(true);
         }
-        else {
-            const result2 = await Http.post(body, "/api/impresores/login");
-            if (result2) {
-                console.log("Login OK");
-                document.cookie = "username=" + username;
-                document.cookie = "_id=" + result;
-                document.cookie = "profile=printer";
-                setAuthorized(true);
-            } else alert("login failed");
-        };
+        else alert("login failed");
+        
 
 
     }
 
 
     useEffect(() => {
-        console.log("TipoUsuario: ", tipoUsuario);
-    }, [authorized, tipoUsuario]);
+        console.log("rolImpresor: ", rolImpresor);
+    }, [authorized, rolImpresor]);
 
     return (
         <>
