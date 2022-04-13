@@ -53,7 +53,7 @@ const ListaImpresores = ({authorized}) => {
         return rowData.precio+" €/ud";
     }
     const tamanyoTemplate = (rowData) => {
-        return rowData.precio+" cm³";
+        return rowData.tamanyo+" cm³";
     }
 
 

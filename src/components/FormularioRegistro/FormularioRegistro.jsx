@@ -58,9 +58,6 @@ const FormularioRegistro = ({ setDisplayRegister }) => {
         else data.perfil = "usuario";
 
         console.log(data);
-        //setFormData(data);
-        //console.log("data:",data);
-
         const ins = await Http.post(data, "/api/usuarios/");
 
         confirmDialog({

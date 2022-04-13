@@ -37,10 +37,10 @@ const Login = ({ authorized, setAuthorized }) => {
         const result = await Http.post(body, "/api/usuarios/login");
         //console.log("Respuesta: ", result);
         if (result) {
-            console.log(result.perfil);
+            console.log("result",result._id);
             result.perfil==="impresor"? setRolImpresor(true):setRolImpresor(false);
             document.cookie = "username=" + username;
-            document.cookie = "_id=" + result;
+            document.cookie = "_id=" + result._id;
             setAuthorized(true);
         }
         else alert("login failed");
