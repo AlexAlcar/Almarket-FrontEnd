@@ -15,7 +15,7 @@ import { addLocale } from 'primereact/api';
 import { Chip } from 'primereact/chip';
 import NuevoPedido from "../NuevoPedido/NuevoPedido";
 
-const ListaImpresores = ({authorized}) => {
+const ListaImpresores = ({ authorized }) => {
     const [impresores, setImpresores] = useState([]);
     const [loading, setLoading] = useState(true);
     const [verNuevoPedido, setverNuevoPedido] = useState(false);
@@ -23,7 +23,7 @@ const ListaImpresores = ({authorized}) => {
         apellido1: null,
         apellido2: null,
         email: null,
-        direccion:null,
+        direccion: null,
         impresoras: null,
         tamanyo: null,
         perfil: null,
@@ -37,12 +37,11 @@ const ListaImpresores = ({authorized}) => {
         _id: null
     })
 
- 
     const toast = useRef(null);
 
     const getListaImpresores = async () => {
         const dataSource = await Http.get("/api/usuarios/getImpresores");
-        console.log(dataSource);
+        //console.log(dataSource);
         setImpresores(dataSource);
     }
 
@@ -50,12 +49,11 @@ const ListaImpresores = ({authorized}) => {
         return <Rating value={parseInt(rowData.puntuacion)} readOnly cancel={false} />
     }
     const priceBodyTemplate = (rowData) => {
-        return rowData.precio+" €/ud";
+        return rowData.precio + " €/ud";
     }
     const tamanyoTemplate = (rowData) => {
-        return rowData.tamanyo+" cm³";
+        return rowData.tamanyo + " cm³";
     }
-
 
     /*const nuevoPedido = (rowData) => {
         setverNuevoPedido(true)
@@ -63,7 +61,6 @@ const ListaImpresores = ({authorized}) => {
         //toast.current.show({ severity: 'info', summary: 'Confirmed', detail: 'You have accepted', life: 3000 });
         
     };*/
-
 
     const handleClickNuevoPedido = (rowData) => {
 
@@ -75,21 +72,19 @@ const ListaImpresores = ({authorized}) => {
                 icon="pi pi-plus-circle"
                 onClick={() => {
                     confirmDialog({
-
                         message: '¿Seguro que quieres hacer un pedido a ' + rowData.usuario + '?',
                         icon: 'pi pi-info-circle',
                         accept: () => {
                             setLoading(true);
-                            
                             //setLoading(false);
-                            setImpresorElegido({...impresorElegido,
+                            setImpresorElegido({
+                                ...impresorElegido,
                                 nombre: rowData.nombre,
                                 apellido1: rowData.apellido1,
                                 apellido2: rowData.apellido2,
                                 telefono: null,
                                 email: rowData.email,
                                 impresoras: rowData.impresoras,
-                                materiales: rowData.materiales,
                                 tamanyo: rowData.tamanyo,
                                 password: rowData.password,
                                 puntuacion: rowData.puntuacion,
@@ -98,9 +93,8 @@ const ListaImpresores = ({authorized}) => {
                                 valoraciones: null,
                                 _id: rowData._id,
                             });
-                            console.log(impresorElegido.usuario);
+                            //console.log(impresorElegido.usuario);
                             setverNuevoPedido(true);
-
                         }
                     });;
                 }
@@ -108,38 +102,33 @@ const ListaImpresores = ({authorized}) => {
             />
         )
     };
+
     
-    const renderFooter = (name) => {
-        return (
-            <div>
-                <Button label="No" icon="pi pi-times"  className="p-button-text" onClick={()=>setverNuevoPedido(false)}/>
-                <Button label="Yes" icon="pi pi-check"  autoFocus />
-            </div>
-        );
-    }
 
     useEffect(() => {
         getListaImpresores();
         //console.log("authorized:", authorized)
     }, []);
 
-    useEffect(()=>{
-        
-    },[loading]);
+    useEffect(() => {
+
+    }, [loading]);
 
     return (
         <div className="card">
-            <Dialog header={"Crear nuevo pedido a "+impresorElegido.usuario} visible={verNuevoPedido} onHide={() =>setverNuevoPedido(false)} breakpoints={{'960px': '75vw'}} style={{width: 'auto'}} footer={renderFooter('displayResponsive')}>
-            <NuevoPedido/>
+            <Dialog header={"Crear nuevo pedido a " + impresorElegido.usuario}
+                visible={verNuevoPedido}
+                onHide={() => setverNuevoPedido(false)}
+                breakpoints={{ '960px': '75vw' }}
+                style={{ width: 'auto' }}
+                >
+                <NuevoPedido impresorElegido={impresorElegido} setverNuevoPedido={setverNuevoPedido}/>
             </Dialog>
-
-
             <Toast ref={toast} />
             <DataTable value={impresores} datakey='_id' header="Lista completa de impresores" responsiveLayout="stack" paginator className="p-datatable-customers" rows={10}
                 globalFilterFields={['usuario', 'nombre', 'apellido1']} filterDisplay="row" size="small" emptyMessage="No se ha encontrado ningún impresor."
             >
                 <Column field="usuario" header="Usuario" sortable filter filterPlaceholder="Buscar por nombre de usuario" className="p-inputtext-sm block mb-2" />
-                
                 <Column field="impresoras" header="Impresoras" sortable />
                 <Column field="tamanyo" header="Tamaño máximo" body={tamanyoTemplate} sortable />
                 <Column field="precio" header="Precio" body={priceBodyTemplate} sortable />

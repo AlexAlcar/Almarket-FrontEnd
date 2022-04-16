@@ -5,27 +5,29 @@ import { Column } from 'primereact/column';
 import { Rating } from 'primereact/rating';
 import { Button } from 'primereact/button';
 import { Toast } from 'primereact/toast';
-import { Sidebar } from 'primereact/sidebar';
+import { FileUpload } from "primereact/fileupload";
 import { Dropdown } from 'primereact/dropdown';
 import { InputTextarea } from 'primereact/inputtextarea';
 import { InputNumber } from 'primereact/inputnumber';
-import { InputText } from 'primereact/inputtext';
+import { Tooltip } from 'primereact/tooltip';
 import { Calendar } from 'primereact/calendar';
 import { addLocale } from 'primereact/api';
 import { ColorPicker } from 'primereact/colorpicker';
 import { Card } from "primereact/card";
 
-const NuevoPedido = ({ verNuevoPedido }) => {
+const NuevoPedido = ({ verNuevoPedido, impresorElegido, setverNuevoPedido }) => {
     const [color, setColor] = useState('1976D2');
     const [nuevoPedido, setNuevoPedido] = useState({
         id_usuario: null,
         id_impresor: null,
         descripcion: null,
         cantidad: null,
+        tamanyo: null,
         material: null,
         fecha_entrega: null,
         estado: null,
         color: null,
+        fichero: null
     });
     const [visibilidad, setVisibilidad] = useState(verNuevoPedido);
     addLocale('es', {
@@ -38,45 +40,79 @@ const NuevoPedido = ({ verNuevoPedido }) => {
         today: 'Hoy',
         clear: 'Claro'
     });
-    return (
-        <div style={{display:'grid', gridAutoFlow:'column', alignItems:'center', justifyItems:'center' }}>
-            <Card style={{ width: '60rem', paddingRight: '5%', paddingLeft: '5%'}} className="p-sidebar-lg" onHide={() => setVisibilidad(false)}>
-                <div className="card">
-                    <div className="p-fluid formgrid grid">
-                        
-                        <div >
-                            <label>Descripción</label><br />
-                            <InputTextarea id="color" ></InputTextarea>
-                            <br /><br />
-                        </div>
-                        <div >
-                            <label htmlFor="date">Cantidad</label><br />
-                            <InputNumber inputId="minmax-buttons" mode="decimal" showButtons min={1} max={999} />
-                            <br /><br />
-                        </div>
-                        <div >
-                            <label htmlFor="date">Material</label>
-                            <Dropdown  optionLabel="name" options={[
-                                { name: 'PLA', code: 'PLA' },
-                                { name: 'PETG', code: 'PET' },
-                                { name: 'Filaflex', code: 'FFL' },
-                                { name: 'ABS', code: 'ABS' },
-                            ]} /><br />
-                        </div>
-                        <div>
-                            <label htmlFor="date">Fecha</label>
-                            <Calendar style={{ width: '60%' }} id="spanish" onChange={(e) => setNuevoPedido({ ...nuevoPedido, fecha_entrega: e.value })} locale="es" dateFormat="dd/mm/yy" />
-                        </div>
-                        <div >
-                            <label>Color</label><br />
-                            <ColorPicker value={color} style={{width:'6%'}} onChange={(e) => setNuevoPedido({ ...nuevoPedido, color: e.value })} ></ColorPicker>
-                            <br /><br />
-                        </div>
 
+    const fileUpload=()=>{
+
+    }
+
+    const crearPedido = () => {
+        //impresorElegido._id
+
+
+
+    }
+
+    useEffect(() => {
+
+    }, [color]);
+    return (
+        <Card style={{ width: '60rem', paddingRight: '1%', paddingLeft: '1%' }} className="p-sidebar-lg" onHide={() => setVisibilidad(false)}>
+
+            <div className="card">
+                <div className="p-fluid formgrid grid">
+                    <div style={{ float: 'left', marginLeft: '20%' }}>
+                        <label htmlFor="date">Cantidad:</label><br />
+                        <InputNumber inputId="minmax-buttons" mode="decimal" showButtons min={1} max={999} style={{ width: '200px' }} />
+                        <br /><br />
+                        <label>Color: #{color}</label><br />
+                        <ColorPicker value={color} onChange={(e) => { setNuevoPedido({ ...nuevoPedido, color: e.value }); setColor(e.value) }} ></ColorPicker>
+                        <br /><br />
+                    </div>
+                    <div style={{ float: 'right', marginRight: '20%' }}>
+                        <label htmlFor="date">Material:</label>
+                        <Dropdown optionLabel="name" options={[
+                            { name: 'PLA', code: 'PLA' },
+                            { name: 'PETG', code: 'PET' },
+                            { name: 'Filaflex', code: 'FFL' },
+                            { name: 'ABS', code: 'ABS' },
+                            { name: 'Otros', code: 'OTROS' },
+                        ]} style={{ width: '200px' }} /><br />
+                        <label htmlFor="date">Fecha Máxima:</label>
+                        <Calendar style={{ width: '200px' }} id="spanish" onChange={(e) => setNuevoPedido({ ...nuevoPedido, fecha_entrega: e.value })} locale="es" dateFormat="dd/mm/yy" />
+                        <br />
+                    </div>
+                    <div style={{ float: 'bottom' }}>
+                        <InputTextarea id="color" style={{ height: '150px' }} placeholder='Descripción / Datos adicionales'></InputTextarea>
+
+                        <div>
+                            <Tooltip target=".custom-choose-btn" content="Elegir" position="bottom" />
+                            <Tooltip target=".custom-upload-btn" content="Subir" position="bottom" />
+                            <Tooltip target=".custom-cancel-btn" content="Limpiar" position="bottom" />
+
+                            <div>
+                                <p>Subir fichero .stl: </p>
+                                <FileUpload
+                                    name="demo[]"
+                                    url="https://primefaces.org/primereact/showcase/upload.php"
+                                    onUpload={fileUpload}
+                                    accept="*/*"
+                                    maxFileSize={1000000}
+                                    emptyTemplate={
+                                        <p className="m-0">Arrastra y suelta ficheros aquí para subir.</p>
+                                    }
+                                />
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </Card>
-        </div>
+            </div>
+
+            <br />
+            <div style={{textAlign:'center'}}>
+                <Button label="Atrás" icon="pi pi-times" className="p-button-text" onClick={() => setverNuevoPedido(false)} />
+                <Button label="Crear" icon="pi pi-check" autoFocus onClick={() => crearPedido()} />
+            </div>
+        </Card>
     )
 }
 export default NuevoPedido;

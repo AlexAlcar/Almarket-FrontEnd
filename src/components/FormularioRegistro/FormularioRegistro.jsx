@@ -35,6 +35,17 @@ const FormularioRegistro = ({ setDisplayRegister }) => {
         direccion: '',
         perfil: '',
         usuario: '',
+        precio: null,
+        tamanyo: null,
+        impresoras: null,
+        nombre: '',
+        apellido1: '',
+        apellido2: '',
+        telefono: '',
+        email: '',
+        direccion: '',
+        perfil: '',
+        usuario: '',
         password: '',
         precio: null,
         tamanyo: null,
@@ -118,34 +129,34 @@ const FormularioRegistro = ({ setDisplayRegister }) => {
                                     )} />
                                     <label htmlFor="name" className={classNames({ 'p-error': errors.name })}>Nombre*</label>
                                 </span>
-                                {getFormErrorMessage('name')}
+                                {getFormErrorMessage('nombre')}
                             </div>
                             <div className="field">
                                 <span className="p-float-label">
-                                    <Controller name="apellido1" control={control} rules={{ required: 'Debes introducir el primer apellido.' }} render={({ field, fieldState }) => (
-                                        <InputText id={field.apellido1} {...field} autoFocus className={classNames({ 'p-invalid': fieldState.invalid })} />
+                                    <Controller name="apellido1" control={control} rules={{ required: 'Debes introducir un apellido.' }} render={({ field, fieldState }) => (
+                                        <InputText id={field.apellido1} {...field}  className={classNames({ 'p-invalid': fieldState.invalid })} />
                                     )} />
                                     <label htmlFor="apellido1" className={classNames({ 'p-error': errors.name })}>Primer Apellido*</label>
                                 </span>
-                                {getFormErrorMessage('name')}
+                                {getFormErrorMessage('apellido1')}
                             </div>
                             <div className="field">
                                 <span className="p-float-label">
                                     <Controller name="apellido2" control={control} render={({ field, fieldState }) => (
-                                        <InputText id={field.name} {...field} autoFocus className={classNames({ 'p-invalid': fieldState.invalid })} />
+                                        <InputText id={field.name} {...field}  className={classNames({ 'p-invalid': fieldState.invalid })} />
                                     )} />
                                     <label htmlFor="apellido2" className={classNames({ 'p-error': errors.name })}>Segundo Apellido</label>
                                 </span>
-                                {getFormErrorMessage('name')}
+                                {getFormErrorMessage('apellido2')}
                             </div>
                             <div className="field">
                                 <span className="p-float-label">
                                     <Controller name="telefono" control={control} render={({ field, fieldState }) => (
-                                        <InputMask id={field.name} {...field} mask="999999999" autoFocus className={classNames({ 'p-invalid': fieldState.invalid })} />
+                                        <InputMask id={field.name} {...field} mask="999999999"  className={classNames({ 'p-invalid': fieldState.invalid })} />
                                     )} />
                                     <label htmlFor="telefono" className={classNames({ 'p-error': errors.name })}>Teléfono</label>
                                 </span>
-                                {getFormErrorMessage('name')}
+                                {getFormErrorMessage('telefono')}
                             </div>
                             <div className="field">
                                 <span className="p-float-label p-input-icon-right">
@@ -162,11 +173,11 @@ const FormularioRegistro = ({ setDisplayRegister }) => {
                             <div className="field">
                                 <span className="p-float-label">
                                     <Controller name="direccion" control={control} rules={{ required: 'Debes introducir la dirección.' }} render={({ field, fieldState }) => (
-                                        <InputText id={field.direccion} {...field} autoFocus className={classNames({ 'p-invalid': fieldState.invalid })} />
+                                        <InputText id={field.direccion} {...field}  className={classNames({ 'p-invalid': fieldState.invalid })} />
                                     )} />
                                     <label htmlFor="direccion" className={classNames({ 'p-error': errors.name })}>Dirección*</label>
                                 </span>
-                                {getFormErrorMessage('name')}
+                                {getFormErrorMessage('direccion')}
                             </div>
                             <Divider align="center">
                                 <ToggleButton checked={toggleUser} onChange={(e) => setToggleUser(!toggleUser)} onLabel="Usuario impresor" offLabel="Usuario normal" style={{ width: '10em', backgroundColor: '#883cae' }} />
@@ -228,24 +239,28 @@ const FormularioRegistro = ({ setDisplayRegister }) => {
                                 ) : ""
                             }
                             <br />
-                            <div className="field" style={{ paddding: '5px' }}>
-                                <span className="p-float-label">
-                                    <Controller name="usuario" control={control} rules={{ required: 'Debes un nombre de usuario.' }} render={({ field, fieldState }) => (
-                                        <InputText id={field.usuario} {...field} autoFocus className={classNames({ 'p-invalid': fieldState.invalid })} />
-                                    )} />
-                                    <label htmlFor="usuario" className={classNames({ 'p-error': errors.name })}>Nombre de usuario*</label>
-                                </span>
-                                {getFormErrorMessage('name')}
-                            </div>
                             <div className="field">
+                            <h5>Nombre de usuario*:</h5>
+                                <span className="p-float-label">
+                                    <Controller name="usuario" control={control} rules={{ required: 'Debes introducir un nombre de usuario.' }} render={({ field, fieldState }) => (
+                                        <InputText id={field.usuario} {...field} className={classNames({ 'p-invalid': fieldState.invalid })} />
+                                    )} />
+                                    <label htmlFor="usuario" className={classNames({ 'p-error': errors.name })}></label>
+                                </span>
+                                {getFormErrorMessage('usuario')}
+                            </div>
+
+                            <div className="field">
+                            <h5>Contraseña*:</h5>
                                 <span className="p-float-label">
                                     <Controller name="password" control={control} rules={{ required: 'Debes introducir una contraseña.' }} render={({ field, fieldState }) => (
                                         <Password id={field.name} {...field} toggleMask className={classNames({ 'p-invalid': fieldState.invalid })} header={passwordHeader} footer={passwordFooter} />
                                     )} />
-                                    <label htmlFor="password" className={classNames({ 'p-error': errors.password })}>Password*</label>
+                                    <label htmlFor="password" className={classNames({ 'p-error': errors.name })}></label>
                                 </span>
                                 {getFormErrorMessage('password')}
                             </div>
+                            
                             <div className="field-checkbox">
                                 <Controller name="accept" control={control} rules={{ required: true }} render={({ field, fieldState }) => (
                                     <Checkbox inputId={field.name} onChange={(e) => field.onChange(e.checked)} checked={field.value} className={classNames({ 'p-invalid': fieldState.invalid })} />
