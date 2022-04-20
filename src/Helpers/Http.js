@@ -26,6 +26,24 @@ export default class Http {
         return await res.json()
     }
 
+
+    static postFichero = async (fichero, url) => {
+        const formData = new FormData();
+        formData.append("stl", fichero);
+        const config = {
+            method: "POST",
+            headers: {
+              "enctype": "multipart/form-data",
+              Accept: "application/json",
+            },
+            body: formData,
+          };
+
+        const res = await fetch(url, config);
+        
+        return await res.json()
+    }
+
     static put = async (body, url) => {
         const request = this.getRequest(body, url, "PUT")
         const res = await fetch(request)
