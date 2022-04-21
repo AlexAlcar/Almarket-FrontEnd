@@ -21,6 +21,7 @@ const NuevoPedido = ({ verNuevoPedido, impresorElegido, setverNuevoPedido }) => 
     const [nuevoPedido, setNuevoPedido] = useState({
         id_usuario: null,
         id_impresor: null,
+        usuario_impresor: null,
         descripcion: null,
         cantidad: 1,
         tamanyo: null,
@@ -50,6 +51,7 @@ const NuevoPedido = ({ verNuevoPedido, impresorElegido, setverNuevoPedido }) => 
         setNuevoPedido({
             id_usuario: null,
             id_impresor: null,
+            usuario_impresor: null,
             descripcion: null,
             cantidad: null,
             tamanyo: null,
@@ -101,6 +103,7 @@ const NuevoPedido = ({ verNuevoPedido, impresorElegido, setverNuevoPedido }) => 
             ...setNuevoPedido,
             id_usuario: Cookies.get('_id'),
             id_impresor: impresorElegido._id,
+            usuario_impresor: impresorElegido.usuario,
             direccion: impresorElegido.direccion,
             estado: "iniciado"
         })

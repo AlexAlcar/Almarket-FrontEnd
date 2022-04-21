@@ -57,12 +57,13 @@ const MisPedidos=()=>{
 
     return(
         <>
+        
         <h2>Lista de pedidos</h2>
         <DataTable value={pedidos} datakey='_id' header="Tus pedidos" responsiveLayout="stack" paginator className="p-datatable-customers" rows={10}
                  size="small" emptyMessage="No se ha encontrado ningún impresor."
             >
                 <Column field="_id" header="Pedido" sortable  />
-                <Column field="id_impresor" header="ID Impresor" sortable />
+                <Column field="usuario_impresor" header="Impresor" sortable />
                 <Column field="fecha_entrega" header="Fecha de entrega" sortable body={ fEntregaTemplate} />
                 <Column field="direccion" header="Dirección" sortable />
                 <Column field="estado" header="Estado" sortable body={statusTemplate} />
