@@ -18,14 +18,12 @@ import './FormularioRegistro.css';
 
 
 const FormularioRegistro = ({ setDisplayRegister }) => {
-    const [showMessage, setShowMessage] = useState(false);
     const [toggleUser, setToggleUser] = useState(false);
     const [valoresImpresor, setValoresImpresor] = useState({
         impresoras: 1,
         tamanyo: 1,
         precio: 1
     })
-    const [formData, setFormData] = useState({});
     const defaultValues = {
         nombre: '',
         apellido1: '',
@@ -52,11 +50,6 @@ const FormularioRegistro = ({ setDisplayRegister }) => {
         impresoras: null,
         accept: false
     }
-
-    useEffect(() => {
-
-    }, []);
-
     const { control, formState: { errors }, handleSubmit, reset } = useForm({ defaultValues });
 
     const onSubmit = async (data) => {
@@ -68,7 +61,7 @@ const FormularioRegistro = ({ setDisplayRegister }) => {
         }
         else data.perfil = "usuario";
 
-        console.log(data);
+        //console.log(data);
         const ins = await Http.post(data, "/api/usuarios/");
 
         confirmDialog({
@@ -81,16 +74,14 @@ const FormularioRegistro = ({ setDisplayRegister }) => {
             footer:<></>
             //accept:()=> {}
         });
-        setShowMessage(true);
         reset();
-        setDisplayRegister(false)
+        setDisplayRegister(false);
     };
 
     const getFormErrorMessage = (name) => {
         return errors[name] && <small className="p-error">{errors[name].message}</small>
     };
 
-    const dialogFooter = <div className="flex justify-content-center"><Button label="OK" className="p-button-text" autoFocus onClick={() => setShowMessage(false)} /></div>;
     const passwordHeader = <h6>Elige una contraseña</h6>;
     const passwordFooter = (
         <React.Fragment>
@@ -108,16 +99,7 @@ const FormularioRegistro = ({ setDisplayRegister }) => {
     return (
         <Card title="Formulario de registro" style={{ width: '55rem', marginBottom: '0em' }}>
             <div className="form-demo">
-                <Dialog visible={showMessage} onHide={() => setShowMessage(false)} position="top" footer={dialogFooter} showHeader={false} breakpoints={{ '960px': '80vw' }} style={{ width: '30vw' }}>
-                    <div className="flex justify-content-center flex-column pt-6 px-3">
-                        <i className="pi pi-check-circle" style={{ fontSize: '5rem', color: 'var(--green-500)' }}></i>
-                        <h5>Registration Successful!</h5>
-                        <p style={{ lineHeight: 1.5, textIndent: '1rem' }}>
-                            <p>Tu cuenta se ha registrado a nombre de <b>{formData.name}</b> . Será válido durante 30 días sin activación.</p>
-                            Por favor revisa en <b>{formData.email}</b> las instrucciones de activación.
-                        </p>
-                    </div>
-                </Dialog>
+
 
                 <div className="flex justify-content-center">
                     <div className="card">

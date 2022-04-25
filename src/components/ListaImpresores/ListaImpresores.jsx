@@ -12,7 +12,7 @@ import { InputNumber } from 'primereact/inputnumber';
 import { InputText } from 'primereact/inputtext';
 import { Calendar } from 'primereact/calendar';
 import { addLocale } from 'primereact/api';
-import { Chip } from 'primereact/chip';
+import { Card } from 'primereact/card';
 import NuevoPedido from "../NuevoPedido/NuevoPedido";
 
 const ListaImpresores = ({ authorized }) => {
@@ -119,7 +119,7 @@ const ListaImpresores = ({ authorized }) => {
     }, [loading]);
 
     return (
-        <div className="card">
+        <div style={{height:'50vw'}}>
             <Dialog header={"Crear nuevo pedido a " + impresorElegido.usuario}
                 visible={verNuevoPedido}
                 onHide={() => setverNuevoPedido(false)}

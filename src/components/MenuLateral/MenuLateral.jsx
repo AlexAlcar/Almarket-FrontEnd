@@ -27,11 +27,6 @@ const MenuLateral = () => {
           url: "./ListaImpresores"
         },
         {
-          label: "Nuevo pedido",
-          icon: "pi pi-plus",
-          url: "./NuevoPedido"
-        },
-        {
           label: "Mis pedidos",
           icon: "pi pi-list",
           url: "./MisPedidos"
@@ -78,11 +73,6 @@ const MenuLateral = () => {
         {
           label: "Option 2",
           icon: "pi pi-fw pi-user-minus"
-        },
-        {
-          label: "Formulario - Test",
-          icon: "pi pi-fw pi-users",
-          url: "./FormularioRegistro"
         }
       ]
     }
@@ -99,7 +89,7 @@ const MenuLateral = () => {
   }
   return (
     <>
-      <Menu model={items} style={{}} />
+      <Menu model={items} style={{height:'100%', width:'100%'}} />
 
     </>
   )
