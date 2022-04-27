@@ -5,6 +5,7 @@ import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { Tag } from 'primereact/tag';
 import { Card } from 'primereact/card';
+import { Button } from 'primereact/button';
 
 const MisPedidos=()=>{
     const [pedidos, setPedidos] = useState();
@@ -40,11 +41,16 @@ const MisPedidos=()=>{
     const fEntregaTemplate =(rowData)=>{
         return rowData.fecha_entrega.split(',',1);
     }
-    /*const impresorTemplate = async (rowData) => {
-        const res = await Http.get(`/api/usuarios/find=${rowData.id_impresor}`);
-        console.log(res);
-        return res._id;
-    }*/
+    const pedidoTemplate =(rowData)=>{
+        return rowData._id.slice(0,6);
+    }
+    const ficheroTemplate = (rowData) => {
+        //const res = await Http.get(`/api/usuarios/find=${rowData.id_impresor}`);
+        // return `<a href="C:\\Proyectos\\Almarket-BackEnd\\uploads\\${rowData.fichero}">Descargar</a> `;
+        let ruta=`C:\\Proyectos\\Almarket-BackEnd\\uploads\\${rowData.fichero}`;
+        
+        return <a href={ruta} download="myFile" target='_blank'>Download file</a>
+    }
 
 
     useEffect(() => {
@@ -63,15 +69,16 @@ const MisPedidos=()=>{
         <DataTable value={pedidos} datakey='_id' responsiveLayout="stack" paginator className="p-datatable-customers" rows={10}
                  size="small" emptyMessage="No se ha encontrado ningún pedido."
             >
-                <Column field="_id" header="Pedido" sortable  />
+                <Column field="_id" header="Pedido" sortable body={pedidoTemplate} />
                 <Column field="usuario_impresor" header="Impresor" />
-                <Column field="fecha_entrega" header="Fecha de entrega" sortable body={ fEntregaTemplate} />
+                <Column field="fecha_entrega" header="Fecha" sortable body={ fEntregaTemplate} />
                 <Column field="direccion" header="Dirección"  />
                 <Column field="estado" header="Estado" sortable body={statusTemplate} />
                 <Column field="material" header="Material" />
                 <Column field="tamanyo" header="Tamaño" sortable body={tamanyoTemplate} />
                 <Column field="precioTotal" header="Precio" sortable body={precioTemplate}/>
                 <Column field="descripcion" header="Descripción" />
+                <Column field="fichero" header="Descargar" body={ficheroTemplate} />
             </DataTable>
         </div>
     )
