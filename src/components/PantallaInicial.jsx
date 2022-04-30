@@ -8,26 +8,24 @@ import React, { useEffect, useState } from 'react';
 
 const PantallaInicial = ({ authorized }) => {
     //crear un array que será la fuente de datos en DATA
-    const[chartUserData, setChartUserData]=useState([]);
+    const [chartUserData, setChartUserData] = useState([]);
+    const [chartPedidosData, setChartPedidosData] = useState([]);
     const [chartUsuarios, setChartUsuarios] = useState({
-        labels: ['Usuarios totales', 'Solicitantes', 'Impresores'],
+        labels: ['Solicitantes', 'Impresores'],
         datasets: [
             {
                 data: chartUserData,
                 backgroundColor: [
-                    "#42A5F5",
                     "#66BB6A",
                     "#FFA726"
                 ],
                 hoverBackgroundColor: [
-                    "#64B5F6",
                     "#81C784",
                     "#FFB74D"
                 ]
             }
         ]
     });
-
     const [lightOptions] = useState({
         plugins: {
             legend: {
@@ -37,22 +35,22 @@ const PantallaInicial = ({ authorized }) => {
             }
         }
     });
-
-
     const [chartPedidos, setChartPedidos] = useState({
-        labels: ['Pedidos Totales', 'Pedidos en proceso', 'Pedidos entregados'],
+        labels: ['Pedidos en estado inicial', 'Pedidos imprimiendo', 'Pedidos en envío', 'Pedidos finalizados'],
         datasets: [
             {
-                data: [300, 50, 100],
+                data: [chartPedidosData],
                 backgroundColor: [
                     "#FF6384",
                     "#36A2EB",
-                    "#FFCE56"
+                    "#FFCE56",
+                    "#FFA726"
                 ],
                 hoverBackgroundColor: [
                     "#FF6384",
                     "#36A2EB",
-                    "#FFCE56"
+                    "#FFCE56",
+                    "#FFB74D"
                 ]
             }]
     });
@@ -67,39 +65,79 @@ const PantallaInicial = ({ authorized }) => {
         }
     });
 
-    const getData=async()=>{
-        let usuariosTotales, conteoImpresores, conteoUsuarios;
-        let pedidosTotales, conteoPedidosEnProceso, conteoPedidosEntregados;
+    const getData = async () => {
+        let conteoUsuarios = 0;
+        let conteoImpresores = 0;
+        let conteoPedidosIni=0;
+        let conteoPedidosImpr=0;
+        let conteoPedidosEnv=0;
+        let conteoPedidosFin=0;
         const resUsuarios = await Http.get("/api/usuarios/");
         const resPedidos = await Http.get("/api/pedidos/");
 
         //console.log(resPedidos.length);
-        setChartUsuarios({...chartUsuarios,
-        datasets:[
-            {
-                data: [resUsuarios.length,20,30],
-                backgroundColor: [
-                    "#42A5F5",
-                    "#66BB6A",
-                    "#FFA726"
-                ],
-                hoverBackgroundColor: [
-                    "#64B5F6",
-                    "#81C784",
-                    "#FFB74D"
-                ]
+        //array1.forEach(element => console.log(element));
+        resUsuarios.forEach(e => {
+            if (e.perfil === "impresor") conteoImpresores++;
+            else conteoUsuarios++;
+        });
+
+        resPedidos.forEach(e => {
+            switch(e.estado){
+            case 'iniciado':
+                conteoPedidosIni++;
+                break;
+            case 'imprimiendo':
+                conteoPedidosImpr++;
+                break;
+            case 'enviado':
+                conteoPedidosEnv++;
+                break;
+            case 'finalizado':
+                conteoPedidosFin++;
+                break;
+            default: break;
             }
-        ]
-        })
-         
-        //setChartUserData(2, 100, 100);
+        });
 
-        //console.log(chartUserData);
+        setChartUsuarios({
+            ...chartUsuarios,
+            datasets: [
+                {
+                    data: [conteoUsuarios, conteoImpresores],
+                    backgroundColor: [
+                        "#42A5F5",
+                        "#66BB6A",
+                        "#FFA726"
+                    ],
+                    hoverBackgroundColor: [
+                        "#64B5F6",
+                        "#81C784",
+                        "#FFB74D"
+                    ]
+                }
+            ]
+        });
 
-        //console.log(usuariosTotales)
-
-
-        
+        setChartPedidos({
+            ...chartPedidos,
+            datasets: [
+                {
+                    data: [conteoPedidosIni, conteoPedidosImpr,conteoPedidosEnv, conteoPedidosFin],
+                    backgroundColor: [
+                        "#FF6384",
+                        "#36A2EB",
+                        "#FFCE56",
+                        "#FFA726"
+                    ],
+                    hoverBackgroundColor: [
+                        "#FF6384",
+                        "#36A2EB",
+                        "#FFCE56",
+                        "#FFB74D"
+                    ]
+                }]
+        });
     }
 
 
@@ -110,24 +148,19 @@ const PantallaInicial = ({ authorized }) => {
 
     return (
         <>
-            <div style={{display:'flex'}}>
-            
+            <div style={{ display: 'flex' }}>
                 <div >
-                <Card title="Estadísticas de usuarios" style={{ width:'40em'}}>
-                <Chart type="pie" data={chartUsuarios} options={lightOptions} style={{  width: '30em' }} />
-            </Card>
+                    <Card title="Estadísticas de usuarios" style={{ width: '40em' }}>
+                        <Chart type="doughnut" data={chartUsuarios} options={lightOptions} style={{ width: '30em' }} />
+                    </Card>
                 </div>
                 <div >
-                <Card title="Estadísticas de pedidos" style={{ width:'40em' }}>
-                <Chart type="doughnut" data={chartPedidos} options={lightOptions2} style={{  width: '30em' }} />
-            </Card>
+                    <Card title="Estadísticas de pedidos" style={{ width: '40em' }}>
+                        <Chart type="doughnut" data={chartPedidos} options={lightOptions2} style={{ width: '30em' }} />
+                    </Card>
                 </div>
             </div>
-        
-
         </>
-
-
     )
 }
 export default PantallaInicial;

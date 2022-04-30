@@ -40,7 +40,7 @@ const MenuLateral = () => {
           url: "./DatosUsuario"
         },
         {
-          label: "Ayuda",
+          label: "FAQ",
           icon: "pi pi-question-circle",
           url: "./Ayuda"
         },

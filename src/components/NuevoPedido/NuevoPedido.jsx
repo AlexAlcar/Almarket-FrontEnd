@@ -120,6 +120,7 @@ const NuevoPedido = ({ verNuevoPedido, impresorElegido, setverNuevoPedido }) => 
                     <div style={{ float: 'left', marginLeft: '20%' }}>
                         <label htmlFor="date">Cantidad:</label><br />
                         <InputNumber
+                        autoFocus
                             inputId="minmax-buttons"
                             mode="decimal"
                             showButtons
@@ -210,7 +211,7 @@ const NuevoPedido = ({ verNuevoPedido, impresorElegido, setverNuevoPedido }) => 
             <br />
             <div style={{ textAlign: 'center' }}>
                 <Button label="Atrás" icon="pi pi-times" className="p-button-text" onClick={() => setverNuevoPedido(false)} />
-                <Button label="Crear" icon="pi pi-check" autoFocus onClick={() => prepararNuevoPedido()} />
+                <Button label="Crear" icon="pi pi-check"  onClick={() => prepararNuevoPedido()} />
             </div>
         </Card>
     )
