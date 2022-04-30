@@ -83,6 +83,7 @@ const NuevoPedido = ({ verNuevoPedido, impresorElegido, setverNuevoPedido }) => 
         if (!nuevoPedido.tamanyo) chequeoDatos("Debes elegir un tamaño mínimo");
         if (!nuevoPedido.color) chequeoDatos("Debes elegir un color");
         if (!nuevoPedido.descripcion) chequeoDatos("Debes escribir una descripción");
+        if (!nuevoPedido.fichero) chequeoDatos("Debes subir un modelo antes de crear el pedido");
         //console.log("Fichero: ", fichero);
         console.log("Impresor elegido: ", impresorElegido);
         console.log("Nuevo Pedido: ", nuevoPedido);
@@ -140,14 +141,14 @@ const NuevoPedido = ({ verNuevoPedido, impresorElegido, setverNuevoPedido }) => 
                             showButtons
                             suffix=" cm³"
                             step={0.1}
-                            min={1} max={impresorElegido.tamanyo + 1}
+                            min={1} max={impresorElegido.tamanyo}
                             onChange={(e) => setNuevoPedido({ ...nuevoPedido, tamanyo: Math.round(e.value * 10) / 10 })}
                             style={{ width: '200px' }} />
                         <br /><br />
 
                         <label>Color: </label><br />
                         <Dropdown
-                            options={impresorElegido.colores}
+                            options={Array.from(new Set(impresorElegido.colores))}
                             onChange={(e) => setNuevoPedido({ ...nuevoPedido, color: e.value })}
                             value={nuevoPedido.color}
                             style={{ width: '200px' }} />
@@ -164,6 +165,7 @@ const NuevoPedido = ({ verNuevoPedido, impresorElegido, setverNuevoPedido }) => 
                         <label htmlFor="date">Fecha Máxima:</label>
                         <Calendar style={{ width: '200px' }} id="spanish" onChange={(e) => setNuevoPedido({ ...nuevoPedido, fecha_entrega: (e.value).toLocaleString() })} locale="es" dateFormat="dd/mm/yy" />
                         <br />
+                        <h3>Precio total: {nuevoPedido.precioTotal}€</h3>
                     </div>
                     <div style={{ float: 'bottom' }}>
                         <InputTextarea
@@ -189,7 +191,7 @@ const NuevoPedido = ({ verNuevoPedido, impresorElegido, setverNuevoPedido }) => 
                                                     console.log(res.xhr.response);
                                                     //let tmp=JSON.parse(res.xhr.response);
                                                     //console.log("temp: ",tmp.filename);
-                                                    setNuevoPedido({ ...nuevoPedido, fichero: JSON.parse(res.xhr.response).filename }); 
+                                                    setNuevoPedido({ ...nuevoPedido, fichero: JSON.parse(res.xhr.response).filename });
                                                     setFicheroSubido(true);
                                                 }
                                             }

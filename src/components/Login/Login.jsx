@@ -41,6 +41,7 @@ const Login = ({ authorized, setAuthorized }) => {
             result.perfil==="impresor"? setRolImpresor(true):setRolImpresor(false);
             document.cookie = "username=" + username;
             document.cookie = "_id=" + result._id;
+            document.cookie = "rol=" + result.perfil;
             setAuthorized(true);
         }
         else alert("login failed");

@@ -3,10 +3,8 @@ import "primereact/resources/primereact.css";
 import { PanelMenu } from 'primereact/panelmenu';
 import { ConfirmDialog, confirmDialog } from 'primereact/confirmdialog';
 import { Toast } from 'primereact/toast';
-
+import Cookies from 'js-cookie';
 import { Menu, } from 'primereact/menu';
-import { Link } from "react-router-dom";
-import { Button } from 'primereact/button';
 import "./MenuLateral.css";
 
 
@@ -22,7 +20,7 @@ const MenuLateral = () => {
       label: "Servicios",
       items: [
         {
-          label: "Impresores",
+          label: "Lista de impresores",
           icon: "pi pi-print",
           url: "./ListaImpresores"
         },
@@ -82,6 +80,7 @@ const MenuLateral = () => {
     console.log("accept");
     document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
     document.cookie = "_id=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    document.cookie = "rol=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
     window.location.reload(false);
   }
   const reject = () => {
@@ -89,7 +88,8 @@ const MenuLateral = () => {
   }
   return (
     <>
-      <Menu model={items} style={{height:'100%', width:'100%'}} />
+      <p style={{textAlign:'center'}}>Hola {Cookies.get('username')}</p>
+      <Menu model={items} style={{height:'95%', width:'100%'}} />
 
     </>
   )

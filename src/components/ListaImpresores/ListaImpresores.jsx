@@ -8,7 +8,7 @@ import { Toast } from 'primereact/toast';
 import { Dialog } from 'primereact/dialog';
 import { Dropdown } from 'primereact/dropdown';
 import { confirmDialog } from 'primereact/confirmdialog';
-import { InputNumber } from 'primereact/inputnumber';
+import Cookies from 'js-cookie';
 import { InputText } from 'primereact/inputtext';
 import { Calendar } from 'primereact/calendar';
 import { addLocale } from 'primereact/api';
@@ -28,7 +28,7 @@ const ListaImpresores = ({ authorized }) => {
         tamanyo: null,
         perfil: null,
         precio: null,
-        colores:[],
+        colores: [],
         nombre: null,
         password: null,
         puntuacion: null,
@@ -56,13 +56,6 @@ const ListaImpresores = ({ authorized }) => {
         return rowData.tamanyo + " cm³";
     }
 
-    /*const nuevoPedido = (rowData) => {
-        setverNuevoPedido(true)
-        return (<p>kk</p>)
-        //toast.current.show({ severity: 'info', summary: 'Confirmed', detail: 'You have accepted', life: 3000 });
-        
-    };*/
-
     const handleClickNuevoPedido = (rowData) => {
 
         return (
@@ -78,6 +71,8 @@ const ListaImpresores = ({ authorized }) => {
                         accept: () => {
                             setLoading(true);
                             //setLoading(false);
+
+
                             setImpresorElegido({
                                 ...impresorElegido,
                                 nombre: rowData.nombre,
@@ -85,9 +80,9 @@ const ListaImpresores = ({ authorized }) => {
                                 apellido2: rowData.apellido2,
                                 telefono: rowData.telefono,
                                 email: rowData.email,
-                                perfil:rowData.perfil,
-                                colores:rowData.colores,
-                                direccion:rowData.direccion,
+                                perfil: rowData.perfil,
+                                colores: rowData.colores,
+                                direccion: rowData.direccion,
                                 impresoras: rowData.impresoras,
                                 tamanyo: rowData.tamanyo,
                                 password: rowData.password,
@@ -98,7 +93,10 @@ const ListaImpresores = ({ authorized }) => {
                                 _id: rowData._id,
                             });
                             //console.log(impresorElegido.usuario);
-                            setverNuevoPedido(true);
+                            if (rowData._id == Cookies.get('_id')) {
+                                alert("No puedes hacerte un pedido a ti mismo!")
+                                setLoading(false)
+                            } else setverNuevoPedido(true);
                         }
                     });;
                 }
@@ -107,7 +105,7 @@ const ListaImpresores = ({ authorized }) => {
         )
     };
 
-    
+
 
     useEffect(() => {
         getListaImpresores();
@@ -119,14 +117,14 @@ const ListaImpresores = ({ authorized }) => {
     }, [loading]);
 
     return (
-        <div style={{height:'50vw'}}>
+        <div style={{ height: '50vw' }}>
             <Dialog header={"Crear nuevo pedido a " + impresorElegido.usuario}
                 visible={verNuevoPedido}
                 onHide={() => setverNuevoPedido(false)}
                 breakpoints={{ '960px': '75vw' }}
                 style={{ width: 'auto' }}
-                >
-                <NuevoPedido impresorElegido={impresorElegido} setverNuevoPedido={setverNuevoPedido}/>
+            >
+                <NuevoPedido impresorElegido={impresorElegido} setverNuevoPedido={setverNuevoPedido} />
             </Dialog>
             <Toast ref={toast} />
             <DataTable value={impresores} datakey='_id' header="Lista completa de impresores" responsiveLayout="stack" paginator className="p-datatable-customers" rows={10}
