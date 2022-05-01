@@ -56,10 +56,8 @@ const MisPedidos=()=>{
         }
     };
 
-    const preActualizarPedido=(rowData, nuevoEstado)=>{
-        
-        
-        setNuevoPedido({...nuevoPedido,
+    const preActualizarPedido= async (rowData, nuevoEstado)=>{
+        /*setNuevoPedido({...nuevoPedido,
             id: rowData._id,
             id_usuario: rowData.id_usuario,
             id_impresor: rowData.id_impresor,
@@ -75,23 +73,25 @@ const MisPedidos=()=>{
             comentarios: rowData.comentarios,
             precioTotal: rowData.precioTotal,
             fichero: rowData.fichero,
-            estado: rowData.estado});
-        console.log("nuevoPedido: ",nuevoPedido)
-        
-        //rowData.estado=nuevoEstado;
-        actualizarPedido();
-    }
+            estado: rowData.estado});*/
 
-    const actualizarPedido= async ()=>{
-        console.log("nuevoPedido: ",nuevoPedido);
-        let id=nuevoPedido.id;
-        delete nuevoPedido.id;
-        console.log("id: ",id);
-        const res = Http.put(nuevoPedido, `/api/pedidos/${id}`);
+        //let id=nuevoPedido.id;
+        let rowDataUpdate=rowData;
+        delete rowDataUpdate._id;
+        
+        rowData.estado=nuevoEstado;
+        console.log("Tras update estado ",rowData);
+        const res = await Http.put(rowData, `/api/pedidos/${rowData._id}`);
+
         if(res)toastTL.current.show({ severity: 'success', summary: 'Datos actualizados', detail: 'El estado del pedido se ha actualizado correctamente', life: 3000 });
         else toastTL.current.show({ severity: 'error', summary: 'Datos NO actualizados', detail: 'Ha ocurrido un error', life: 3000 });
-        
+
+        getPedidosImpresor();
+        //console.log("nuevoPedido: ",nuevoPedido)
+        //rowData.estado=nuevoEstado;
+        //actualizarPedido();
     }
+
 
     const statusPrinterTemplate=(rowData)=> {
         if(rowData.estado==='finalizado') return <Tag className="mr-2" severity="success" value="Pedido finalizado"></Tag>;
@@ -99,8 +99,6 @@ const MisPedidos=()=>{
         options={["iniciado", "imprimiendo","enviado","finalizado"]}  
         onChange={(e)=>preActualizarPedido(rowData, e.value )} />
         };
-    
-
     const tamanyoTemplate = (rowData) => {
         return rowData.tamanyo + " cm³";
     }
