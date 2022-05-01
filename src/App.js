@@ -18,6 +18,7 @@ import NuevoPedido from "./components/NuevoPedido/NuevoPedido";
 import MisPedidos from "./components/MisPedidos/MisPedidos";
 import Ayuda from "./components/Ayuda/Ayuda";
 import Login from "./components/Login/Login";
+import Contacto from "./components/Contacto/Contacto";
 //import PrivateRoute from "./Helpers/PrivateRoute";
 
 
@@ -47,6 +48,7 @@ function App() {
             <Route exact path="Ayuda" element={<Ayuda />} />
             <Route exact path="NuevoPedido" element={<NuevoPedido />} />
             <Route exact path="DatosUsuario" element={<DatosUsuario />} />
+            <Route exact path="Contacto" element={<Contacto />} />
             <Route render={() => <h1>Not found!</h1>} />
         </Routes>
       </Principal>

@@ -53,6 +53,7 @@ const FormularioRegistro = ({ setDisplayRegister }) => {
     const { control, formState: { errors }, handleSubmit, reset } = useForm({ defaultValues });
 
     const onSubmit = async (data) => {
+        let checkUsername;
         if (toggleUser) {
             data.impresoras = valoresImpresor.impresoras;
             data.tamanyo = valoresImpresor.tamanyo;
@@ -61,21 +62,21 @@ const FormularioRegistro = ({ setDisplayRegister }) => {
         }
         else data.perfil = "usuario";
 
-        //console.log(data);
-        const ins = await Http.post(data, "/api/usuarios/");
-
-        confirmDialog({
-            message: 'Usuario creado con éxito, ya puedes iniciar sesión',
-            header: 'Usuario creado correctamente',
-            icon: 'pi pi-check-circle',
-            //acceptLabel:'Perfecto!',
-            
-            //footer:<Button label="Yes" icon="pi pi-check" onClick={()=>{}}/>,
-            footer:<></>
-            //accept:()=> {}
-        });
-        reset();
-        setDisplayRegister(false);
+        checkUsername=await Http.get(`/api/usuarios/checkUsername=${data.usuario}`);
+        console.log("check username:", checkUsername);
+        if (checkUsername) alert("El nombre de usuario ya existe");
+        else {
+            //console.log(data);
+            const ins = await Http.post(data, "/api/usuarios/");
+            confirmDialog({
+                message: 'Usuario creado con éxito, ya puedes iniciar sesión',
+                header: 'Usuario creado correctamente',
+                icon: 'pi pi-check-circle',
+                footer: <></>
+            });
+            reset();
+            setDisplayRegister(false);
+        }
     };
 
     const getFormErrorMessage = (name) => {
@@ -99,8 +100,6 @@ const FormularioRegistro = ({ setDisplayRegister }) => {
     return (
         <Card title="Formulario de registro" style={{ width: '55rem', marginBottom: '0em' }}>
             <div className="form-demo">
-
-
                 <div className="flex justify-content-center">
                     <div className="card">
                         <form onSubmit={handleSubmit(onSubmit)} className="p-fluid">
@@ -116,7 +115,7 @@ const FormularioRegistro = ({ setDisplayRegister }) => {
                             <div className="field">
                                 <span className="p-float-label">
                                     <Controller name="apellido1" control={control} rules={{ required: 'Debes introducir un apellido.' }} render={({ field, fieldState }) => (
-                                        <InputText id={field.apellido1} {...field}  className={classNames({ 'p-invalid': fieldState.invalid })} />
+                                        <InputText id={field.apellido1} {...field} className={classNames({ 'p-invalid': fieldState.invalid })} />
                                     )} />
                                     <label htmlFor="apellido1" className={classNames({ 'p-error': errors.name })}>Primer Apellido*</label>
                                 </span>
@@ -125,7 +124,7 @@ const FormularioRegistro = ({ setDisplayRegister }) => {
                             <div className="field">
                                 <span className="p-float-label">
                                     <Controller name="apellido2" control={control} render={({ field, fieldState }) => (
-                                        <InputText id={field.name} {...field}  className={classNames({ 'p-invalid': fieldState.invalid })} />
+                                        <InputText id={field.name} {...field} className={classNames({ 'p-invalid': fieldState.invalid })} />
                                     )} />
                                     <label htmlFor="apellido2" className={classNames({ 'p-error': errors.name })}>Segundo Apellido</label>
                                 </span>
@@ -134,7 +133,7 @@ const FormularioRegistro = ({ setDisplayRegister }) => {
                             <div className="field">
                                 <span className="p-float-label">
                                     <Controller name="telefono" control={control} render={({ field, fieldState }) => (
-                                        <InputMask id={field.name} {...field} mask="999999999"  className={classNames({ 'p-invalid': fieldState.invalid })} />
+                                        <InputMask id={field.name} {...field} mask="999999999" className={classNames({ 'p-invalid': fieldState.invalid })} />
                                     )} />
                                     <label htmlFor="telefono" className={classNames({ 'p-error': errors.name })}>Teléfono</label>
                                 </span>
@@ -155,7 +154,7 @@ const FormularioRegistro = ({ setDisplayRegister }) => {
                             <div className="field">
                                 <span className="p-float-label">
                                     <Controller name="direccion" control={control} rules={{ required: 'Debes introducir la dirección.' }} render={({ field, fieldState }) => (
-                                        <InputText id={field.direccion} {...field}  className={classNames({ 'p-invalid': fieldState.invalid })} />
+                                        <InputText id={field.direccion} {...field} className={classNames({ 'p-invalid': fieldState.invalid })} />
                                     )} />
                                     <label htmlFor="direccion" className={classNames({ 'p-error': errors.name })}>Dirección*</label>
                                 </span>
@@ -222,7 +221,7 @@ const FormularioRegistro = ({ setDisplayRegister }) => {
                             }
                             <br />
                             <div className="field">
-                            <h5>Nombre de usuario*:</h5>
+                                <h5>Nombre de usuario*:</h5>
                                 <span className="p-float-label">
                                     <Controller name="usuario" control={control} rules={{ required: 'Debes introducir un nombre de usuario.' }} render={({ field, fieldState }) => (
                                         <InputText id={field.usuario} {...field} className={classNames({ 'p-invalid': fieldState.invalid })} />
@@ -233,7 +232,7 @@ const FormularioRegistro = ({ setDisplayRegister }) => {
                             </div>
 
                             <div className="field">
-                            <h5>Contraseña*:</h5>
+                                <h5>Contraseña*:</h5>
                                 <span className="p-float-label">
                                     <Controller name="password" control={control} rules={{ required: 'Debes introducir una contraseña.' }} render={({ field, fieldState }) => (
                                         <Password id={field.name} {...field} toggleMask className={classNames({ 'p-invalid': fieldState.invalid })} header={passwordHeader} footer={passwordFooter} />
@@ -242,7 +241,7 @@ const FormularioRegistro = ({ setDisplayRegister }) => {
                                 </span>
                                 {getFormErrorMessage('password')}
                             </div>
-                            
+
                             <div className="field-checkbox">
                                 <Controller name="accept" control={control} rules={{ required: true }} render={({ field, fieldState }) => (
                                     <Checkbox inputId={field.name} onChange={(e) => field.onChange(e.checked)} checked={field.value} className={classNames({ 'p-invalid': fieldState.invalid })} />

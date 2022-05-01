@@ -3,6 +3,7 @@ import Http from "../../Helpers/Http";
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { PrimeIcons } from 'primereact/api';
+import { Toast } from 'primereact/toast';
 import { Button } from 'primereact/button';
 import Cookies from 'js-cookie';
 import { FileUpload } from "primereact/fileupload";
@@ -16,7 +17,7 @@ import { confirmDialog } from 'primereact/confirmdialog';
 import { Card } from "primereact/card";
 
 const NuevoPedido = ({ verNuevoPedido, impresorElegido, setverNuevoPedido }) => {
-    const [fichero, setFichero] = useState();
+    const toast = useRef(null);
     const [ficheroSubido, setFicheroSubido] = useState(false);
     const [nuevoPedido, setNuevoPedido] = useState({
         id_usuario: null,
@@ -46,7 +47,9 @@ const NuevoPedido = ({ verNuevoPedido, impresorElegido, setverNuevoPedido }) => 
         today: 'Hoy',
         clear: 'Claro'
     });
-
+    const showSuccess = () => {
+        toast.current.show({severity:'success', summary: 'Pedido creado con éxito', detail:'Puedes hacer un seguimiento de tu pedido desde "Mis Pedidos"', life: 3000});
+    }
     const borrarPedido = () => {
         setNuevoPedido({
             id_usuario: null,
@@ -94,7 +97,14 @@ const NuevoPedido = ({ verNuevoPedido, impresorElegido, setverNuevoPedido }) => 
 
         const res = await Http.post(nuevoPedido, "/api/pedidos/");
         console.log("respuesta: ", res);
+        
         setverNuevoPedido(false);
+        confirmDialog({
+            message: 'Puedes consultar los detalles del pedido en el apartado "Mis Pedidos"',
+            header: 'Pedido creado correctamente',
+            icon: 'pi pi-check-circle',
+            footer:<></>
+        });
     }
 
     useEffect(() => {
@@ -113,8 +123,11 @@ const NuevoPedido = ({ verNuevoPedido, impresorElegido, setverNuevoPedido }) => 
 
 
     return (
+        <>
+        <Toast ref={toast} />
+        
         <Card style={{ width: '60rem', paddingRight: '1%', paddingLeft: '1%' }} className="p-sidebar-lg" onHide={() => setVisibilidad(false)}>
-
+        
             <div className="card">
                 <div className="p-fluid formgrid grid">
                     <div style={{ float: 'left', marginLeft: '20%' }}>
@@ -214,6 +227,7 @@ const NuevoPedido = ({ verNuevoPedido, impresorElegido, setverNuevoPedido }) => 
                 <Button label="Crear" icon="pi pi-check"  onClick={() => prepararNuevoPedido()} />
             </div>
         </Card>
+        </>
     )
 }
 export default NuevoPedido;

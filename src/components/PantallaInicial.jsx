@@ -44,13 +44,13 @@ const PantallaInicial = ({ authorized }) => {
                     "#FF6384",
                     "#36A2EB",
                     "#FFCE56",
-                    "#FFA726"
+                    "#36A2EB"
                 ],
                 hoverBackgroundColor: [
                     "#FF6384",
                     "#36A2EB",
                     "#FFCE56",
-                    "#FFB74D"
+                    "#36A2EB"
                 ]
             }]
     });
@@ -125,16 +125,16 @@ const PantallaInicial = ({ authorized }) => {
                 {
                     data: [conteoPedidosIni, conteoPedidosImpr,conteoPedidosEnv, conteoPedidosFin],
                     backgroundColor: [
-                        "#FF6384",
-                        "#36A2EB",
+                        "#42A5F5",
+                        "#66BB6A",
                         "#FFCE56",
-                        "#FFA726"
+                        "#FF6384"
                     ],
                     hoverBackgroundColor: [
-                        "#FF6384",
-                        "#36A2EB",
-                        "#FFCE56",
-                        "#FFB74D"
+                        "#64B5F6",
+                        "#81C784",
+                        "#FFA726",
+                        "#FF6384"
                     ]
                 }]
         });

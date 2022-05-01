@@ -2,7 +2,7 @@ import "primeicons/primeicons.css";
 import "primereact/resources/primereact.css";
 import { PanelMenu } from 'primereact/panelmenu';
 import { ConfirmDialog, confirmDialog } from 'primereact/confirmdialog';
-import { Toast } from 'primereact/toast';
+import { Chip } from 'primereact/chip';
 import Cookies from 'js-cookie';
 import { Menu, } from 'primereact/menu';
 import "./MenuLateral.css";
@@ -44,7 +44,11 @@ const MenuLateral = () => {
           icon: "pi pi-question-circle",
           url: "./Ayuda"
         },
-
+        {
+          label: "Contacto",
+          icon: "pi pi-envelope",
+          url: "./Contacto"
+        },
         {
           label: "Cerrar Sesión",
           icon: "pi pi-times",
@@ -58,19 +62,32 @@ const MenuLateral = () => {
             });
           }
         }
+        
       ]
     },
     {
-      label: "Otros",
+      label: "Nuestras redes",
       icon: "pi pi-fw pi-user",
       items: [
         {
-          label: "Option 1",
-          icon: "pi pi-globe"
+          label: "Facebook",
+          icon: "pi pi-facebook",
+          url: "https://www.facebook.com/"
         },
         {
-          label: "Option 2",
-          icon: "pi pi-fw pi-user-minus"
+          label: "Twitter",
+          icon: "pi pi-fw pi-twitter",
+          url: "https://twitter.com/home?lang=es"
+        },
+        {
+          label: "Linkedin",
+          icon: "pi pi-fw pi-linkedin",
+          url:"https://www.linkedin.com/"
+        },
+        {
+          label: "Youtube",
+          icon: "pi pi-fw pi-youtube",
+          url: "https://www.youtube.com/"
         }
       ]
     }

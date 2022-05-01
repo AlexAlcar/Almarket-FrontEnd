@@ -32,10 +32,16 @@ const Ayuda = () => {
                     </p>
                 </AccordionTab>
 
-                <AccordionTab header="¿Si le hago un pedido a un impresor mas económico, recibiré un producto de mala calidad?">
-                    <p>No, los precios los establecen los propios usuarios, y quizás hayan pueso un precio menor porque por 
-                        la calidad o cantidad de máquinas el servicio le reporta mas beneficios, pero en ningún momento el sistema
-                        se ha concebido para que exista una relación entre el precio y la calidad
+                <AccordionTab header="¿Puedo pedir la impresión en cualquier color?">
+                    <p>Los impresores pueden modificar en cualquier momento la cantidad y diversidad de colores que pueden ofrecer,
+                        por lo que el mismo impresor puede ampliar su catálogo de colores en cualquier momento.
+                    </p>
+                </AccordionTab>
+
+                <AccordionTab header="Tengo impresoras y quiero ofrecer mis servicios, ¿puedo también hacer pedidos con mi cuenta?">
+                    <p>Si, en el apartado "Mis Pedidos" podrás revisar tanto los pedidos que has hecho a otros impresores, como 
+                        los que te han asignado a ti, así como cambiar el estado de los pedidos que te hayan hecho y descargar de nuevo 
+                        el modelo a imprimir.
                     </p>
                 </AccordionTab>
 
