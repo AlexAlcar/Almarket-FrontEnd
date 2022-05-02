@@ -23,6 +23,7 @@ const NuevoPedido = ({ verNuevoPedido, impresorElegido, setverNuevoPedido }) => 
         id_usuario: null,
         id_impresor: null,
         usuario_impresor: null,
+        usuario:null,
         descripcion: null,
         cantidad: 1,
         tamanyo: null,
@@ -55,6 +56,7 @@ const NuevoPedido = ({ verNuevoPedido, impresorElegido, setverNuevoPedido }) => 
             id_usuario: null,
             id_impresor: null,
             usuario_impresor: null,
+            usuario:null,
             descripcion: null,
             cantidad: null,
             tamanyo: null,
@@ -113,6 +115,7 @@ const NuevoPedido = ({ verNuevoPedido, impresorElegido, setverNuevoPedido }) => 
         setNuevoPedido({
             ...setNuevoPedido,
             id_usuario: Cookies.get('_id'),
+            usuario: Cookies.get('username'),
             id_impresor: impresorElegido._id,
             usuario_impresor: impresorElegido.usuario,
             direccion: impresorElegido.direccion,
@@ -162,7 +165,9 @@ const NuevoPedido = ({ verNuevoPedido, impresorElegido, setverNuevoPedido }) => 
 
                         <label>Color: </label><br />
                         <Dropdown
-                            options={Array.from(new Set(impresorElegido.colores))}
+                            options={[
+                                "blanco","negro", "gris", "azul", "rojo", "verde", "amarillo", "rosa", "marrón","naranja"
+                            ]}
                             onChange={(e) => setNuevoPedido({ ...nuevoPedido, color: e.value })}
                             value={nuevoPedido.color}
                             style={{ width: '200px' }} />

@@ -47,7 +47,7 @@ const ListaImpresores = ({ authorized }) => {
     }
 
     const ratingTemplate = (rowData) => {
-        return <Rating value={parseInt(rowData.puntuacion)} readOnly cancel={false} />
+        return <><Rating value={parseInt(rowData.puntuacion)/parseInt(rowData.valoraciones)} readOnly cancel={false} style={{ display: "inline" }} /> ({rowData.valoraciones})</>
     }
     const priceBodyTemplate = (rowData) => {
         return rowData.precio + " €/ud";
@@ -134,7 +134,7 @@ const ListaImpresores = ({ authorized }) => {
                 <Column field="impresoras" header="Impresoras" sortable />
                 <Column field="tamanyo" header="Tamaño máximo" body={tamanyoTemplate} sortable />
                 <Column field="precio" header="Precio" body={priceBodyTemplate} sortable />
-                <Column field="puntuacion" header="Puntuación" body={ratingTemplate} sortable />
+                <Column field="valoraciones" header="Valoraciones" body={ratingTemplate} sortable sortField="puntuacion"/>
                 <Column body={handleClickNuevoPedido} />
             </DataTable>
         </div>
