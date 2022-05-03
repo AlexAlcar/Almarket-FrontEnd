@@ -6,6 +6,7 @@ import { DataTable } from 'primereact/datatable';
 import { Dropdown } from 'primereact/dropdown';
 import { Column } from 'primereact/column';
 import { Tag } from 'primereact/tag';
+import { Chip } from 'primereact/chip';
 import { Toast } from 'primereact/toast';
 import { Divider } from 'primereact/divider';
 
@@ -36,6 +37,8 @@ const MisPedidos = () => {
                 return <Tag className="mr-2" severity="warning" value={rowData.estado}></Tag>
             case 'finalizado':
                 return <Tag className="mr-2" severity="success" value={rowData.estado}></Tag>
+            case 'cerrado':
+                return <Tag className="mr-2" severity="success" value="finalizado"></Tag>
             default:
                 return '-';
         }
@@ -60,7 +63,7 @@ const MisPedidos = () => {
     }
 
     const statusPrinterTemplate = (rowData) => {
-        if (rowData.estado === 'finalizado') return <Tag className="mr-2" severity="success" value="Pedido finalizado"></Tag>;
+        if (rowData.estado === 'finalizado' || rowData.estado === 'cerrado') return <Tag className="mr-2" severity="success" value="Pedido finalizado"></Tag>;
         else return <Dropdown value={rowData.estado}
             options={["iniciado", "imprimiendo", "enviado", "finalizado"]}
             onChange={(e) => preActualizarPedido(rowData, e.value)} />
@@ -79,26 +82,28 @@ const MisPedidos = () => {
     }
     const ficheroTemplate = (rowData) => {
         let ruta = `C:\\Proyectos\\Almarket-BackEnd\\uploads\\${rowData.fichero}`;
-        if(rowData.estado==="finalizado")
+        if (rowData.estado === "finalizado")
             return <a href={ruta} download="myFile" target='_blank'>Download file</a>
     }
+
     const ratingTemplate = (rowData) => {
-        if(rowData.estado==="finalizado")
-            return <> 
-                <Rating value={rowData.valoraciones} cancel={false} onChange={(e) => valorarImpresor(rowData.usuario_impresor, rowData._id, e.value)} 
+        //let printerInfo=getPrinterInfo(rowData.id_impresor);
+        //console.log(res);
+        if (rowData.estado === "finalizado")
+            return <>
+                <Rating value={rowData.valoraciones} cancel={false} onChange={(e) => valorarImpresor(rowData.usuario_impresor, rowData._id, e.value)}
                 />
             </>
-    }
-
-
+        else if (rowData.estado === "cerrado")
+            return <i className="pi pi-check" />;
+        }
     const valorarImpresor = async (impresor, idPedido, punt) => {
-        let data = { puntuacion: punt, pedido:idPedido };
-        let data2={estado:"cerrado"};
+        let data = { puntuacion: punt, pedido: idPedido };
+        let data2 = { estado: "cerrado" };
         const res = await Http.put(data, `/api/usuarios/rateUser=${impresor}`);
-
-        //const res2=await Http.put(data2, `/api/pedidos/${idPedido}`);
         console.log(res);
         toastTL.current.show({ severity: 'success', summary: 'Valoración enviada', detail: 'Has valorado el pedido', life: 3000 });
+        getPedidos();
         /////////////
     }
 
@@ -130,9 +135,8 @@ const MisPedidos = () => {
                 <Column field="color" header="Color" />
                 <Column field="tamanyo" header="Tamaño" sortable body={tamanyoTemplate} />
                 <Column field="precioTotal" header="Precio" sortable body={precioTemplate} />
+                <Column id="colValoracion" field="valoracion" header="Valorar" body={ratingTemplate} />
                 <Column field="descripcion" header="Descripción" />
-                <Column id="colValoracion" field="valoracion" header="Valoración" body={ratingTemplate} />
-                <Column field="fichero" header="Descargar" body={ficheroTemplate} />
             </DataTable>
 
             {Cookies.get('rol') === "impresor" ? (
