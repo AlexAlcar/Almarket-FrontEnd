@@ -96,7 +96,7 @@ const MisPedidos = () => {
         const res = await Http.put(data, `/api/usuarios/rateUser=${impresor}`);
         console.log(res);
         toastTL.current.show({ severity: 'success', summary: 'Valoración enviada', detail: 'Has valorado el pedido', life: 3000 });
-        //console.log(document.getElementById("colValoracion"));
+        /////////////
     }
 
 
