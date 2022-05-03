@@ -85,15 +85,18 @@ const MisPedidos = () => {
     const ratingTemplate = (rowData) => {
         if(rowData.estado==="finalizado")
             return <> 
-                <Rating value={rowData.valoraciones} cancel={false} onChange={(e) => valorarImpresor(rowData.usuario_impresor, e.value)} 
+                <Rating value={rowData.valoraciones} cancel={false} onChange={(e) => valorarImpresor(rowData.usuario_impresor, rowData._id, e.value)} 
                 />
             </>
     }
 
 
-    const valorarImpresor = async (impresor, punt) => {
-        let data = { puntuacion: punt };
+    const valorarImpresor = async (impresor, idPedido, punt) => {
+        let data = { puntuacion: punt, pedido:idPedido };
+        let data2={estado:"cerrado"};
         const res = await Http.put(data, `/api/usuarios/rateUser=${impresor}`);
+
+        //const res2=await Http.put(data2, `/api/pedidos/${idPedido}`);
         console.log(res);
         toastTL.current.show({ severity: 'success', summary: 'Valoración enviada', detail: 'Has valorado el pedido', life: 3000 });
         /////////////
