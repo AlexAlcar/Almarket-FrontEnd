@@ -38,7 +38,7 @@ const MisPedidos = () => {
             case 'finalizado':
                 return <Tag className="mr-2" severity="success" value={rowData.estado}></Tag>
             case 'cerrado':
-                return <Tag className="mr-2" severity="success" value="finalizado"></Tag>
+                return <Tag className="mr-2" severity="success" value="valorado"></Tag>
             default:
                 return '-';
         }
@@ -82,7 +82,7 @@ const MisPedidos = () => {
     }
     const ficheroTemplate = (rowData) => {
         let ruta = `C:\\Proyectos\\Almarket-BackEnd\\uploads\\${rowData.fichero}`;
-        if (rowData.estado === "finalizado")
+        if (rowData.estado !== "finalizado" && rowData.estado !== "cerrado")
             return <a href={ruta} download="myFile" target='_blank'>Download file</a>
     }
 
