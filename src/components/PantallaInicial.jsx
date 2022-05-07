@@ -42,7 +42,6 @@ const PantallaInicial = ({ authorized }) => {
       },
     ],
   });
-
   const [lightOptions2] = useState({
     plugins: {
       legend: {
@@ -52,6 +51,38 @@ const PantallaInicial = ({ authorized }) => {
       },
     },
   });
+
+  const [basicData] = useState({
+    labels: ["U1", "U2", "U3", "U4", "U5"],
+    datasets: [
+      {
+        label: "Nº de pedidos",
+        backgroundColor: "#707830",
+        data: [65, 59, 80, 81, 56]
+      }
+    ]
+  });
+  const getLightTheme = () => {
+    let horizontalOptions = {
+      indexAxis: "y",
+      maintainAspectRatio: false,
+      aspectRatio: 0.8,
+      plugins: { legend: { labels: { color: "#495057" } } },
+      scales: {
+        x: {
+          ticks: { color: "#495057" },
+          grid: { color: "#ebedef" }
+        },
+        y: {
+          ticks: { color: "#495057" },
+          grid: { color: "#ebedef" }
+        }
+      }
+    };
+    return { horizontalOptions };
+  };
+  const { horizontalOptions } = getLightTheme();
+
 
   const getData = async () => {
     let conteoUsuarios = 0;
@@ -64,10 +95,14 @@ const PantallaInicial = ({ authorized }) => {
     const resPedidos = await Http.get("/api/pedidos/");
 
     //console.log(resPedidos.length);
-    //array1.forEach(element => console.log(element));
     resUsuarios.forEach((e) => {
       if (e.perfil === "impresor") conteoImpresores++;
       else conteoUsuarios++;
+
+
+
+      //resUsuarios
+      //bresUsuariosjs.sort((a,b) => a.last_nom - b.last_nom);
     });
 
     resPedidos.forEach((e) => {
@@ -120,7 +155,7 @@ const PantallaInicial = ({ authorized }) => {
     <>
       <div style={{ display: "flex" }}>
         <div>
-          <Card title="Estadísticas de usuarios" style={{ width: "40em" }}>
+          <Card title="Estadísticas de usuarios" style={{ width: "40em", textAlign:'center' }}>
             <Chart
               type="doughnut"
               data={chartUsuarios}
@@ -130,7 +165,7 @@ const PantallaInicial = ({ authorized }) => {
           </Card>
         </div>
         <div>
-          <Card title="Estadísticas de pedidos" style={{ width: "40em" }}>
+          <Card title="Estadísticas de pedidos" style={{ width: "40em", textAlign:'center' }}>
             <Chart
               type="doughnut"
               data={chartPedidos}
@@ -140,6 +175,9 @@ const PantallaInicial = ({ authorized }) => {
           </Card>
         </div>
       </div>
+      {/*<Card title="Top 5 usuarios" style={{ width: "80em", textAlign:'center' }}>
+      <Chart type="bar" data={basicData} options={horizontalOptions} style={{ width: "98%" }} />
+  </Card>*/}
     </>
   );
 };

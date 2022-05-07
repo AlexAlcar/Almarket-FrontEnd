@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import Cookies from "js-cookie";
 import Http from "../../Helpers/Http";
+import { ConfirmDialog } from "primereact/confirmdialog";
 import { Toast } from "primereact/toast";
 import { Divider } from "primereact/divider";
 import { Inplace, InplaceDisplay, InplaceContent } from "primereact/inplace";

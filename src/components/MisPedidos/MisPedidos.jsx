@@ -238,7 +238,7 @@ const MisPedidos = () => {
       ) : (
         ""
       )}
-      <div style={{ fontSize: "11px", marginTop: "5%" }}>
+      <div style={{ fontSize: "11px", marginTop: "1%" }}>
         <h4>Leyenda:</h4>
         <p>
           <Tag
