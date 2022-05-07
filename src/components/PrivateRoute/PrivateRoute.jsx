@@ -1,11 +1,11 @@
 import { Navigate } from "react-router";
 
-function PrivateRoute({children}){
-  const auth = window.localStorage.getItem('username');
+function PrivateRoute({ children }) {
+  const auth = window.localStorage.getItem("username");
 
-  console.log(auth)
+  console.log(auth);
 
-  return auth? children : <Navigate to='/Login'/>
+  return auth ? children : <Navigate to="/Login" />;
 }
 
-export default PrivateRoute
+export default PrivateRoute;

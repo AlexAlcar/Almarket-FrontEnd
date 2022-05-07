@@ -1,20 +1,18 @@
 import "primeicons/primeicons.css";
 import "primereact/resources/primereact.css";
-import { PanelMenu } from 'primereact/panelmenu';
-import { ConfirmDialog, confirmDialog } from 'primereact/confirmdialog';
-import { Chip } from 'primereact/chip';
-import Cookies from 'js-cookie';
-import { Menu, } from 'primereact/menu';
+import { PanelMenu } from "primereact/panelmenu";
+import { ConfirmDialog, confirmDialog } from "primereact/confirmdialog";
+import { Chip } from "primereact/chip";
+import Cookies from "js-cookie";
+import { Menu } from "primereact/menu";
 import "./MenuLateral.css";
-
-
 
 const MenuLateral = () => {
   const items = [
     {
       label: "Inicio",
       icon: "pi pi-home",
-      url: "./"
+      url: "./",
     },
     {
       label: "Servicios",
@@ -22,14 +20,14 @@ const MenuLateral = () => {
         {
           label: "Lista de impresores",
           icon: "pi pi-print",
-          url: "./ListaImpresores"
+          url: "./ListaImpresores",
         },
         {
           label: "Mis pedidos",
           icon: "pi pi-list",
-          url: "./MisPedidos"
+          url: "./MisPedidos",
         },
-      ]
+      ],
     },
     {
       label: "Usuario",
@@ -37,33 +35,32 @@ const MenuLateral = () => {
         {
           label: "Mis datos",
           icon: "pi pi-user",
-          url: "./DatosUsuario"
+          url: "./DatosUsuario",
         },
         {
           label: "FAQ",
           icon: "pi pi-question-circle",
-          url: "./Ayuda"
+          url: "./Ayuda",
         },
         {
           label: "Contacto",
           icon: "pi pi-envelope",
-          url: "./Contacto"
+          url: "./Contacto",
         },
         {
           label: "Cerrar Sesión",
           icon: "pi pi-times",
           command: () => {
             confirmDialog({
-              message: '¿Seguro que deseas cerrar sesión?',
-              header: 'Cerrar Sesión',
-              icon: 'pi pi-exclamation-triangle',
+              message: "¿Seguro que deseas cerrar sesión?",
+              header: "Cerrar Sesión",
+              icon: "pi pi-exclamation-triangle",
               accept,
-              reject
+              reject,
             });
-          }
-        }
-        
-      ]
+          },
+        },
+      ],
     },
     {
       label: "Nuestras redes",
@@ -72,25 +69,25 @@ const MenuLateral = () => {
         {
           label: "Facebook",
           icon: "pi pi-facebook",
-          url: "https://www.facebook.com/"
+          url: "https://www.facebook.com/",
         },
         {
           label: "Twitter",
           icon: "pi pi-fw pi-twitter",
-          url: "https://twitter.com/home?lang=es"
+          url: "https://twitter.com/home?lang=es",
         },
         {
           label: "Linkedin",
           icon: "pi pi-fw pi-linkedin",
-          url:"https://www.linkedin.com/"
+          url: "https://www.linkedin.com/",
         },
         {
           label: "Youtube",
           icon: "pi pi-fw pi-youtube",
-          url: "https://www.youtube.com/"
-        }
-      ]
-    }
+          url: "https://www.youtube.com/",
+        },
+      ],
+    },
   ];
 
   const accept = () => {
@@ -99,16 +96,15 @@ const MenuLateral = () => {
     document.cookie = "_id=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
     document.cookie = "rol=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
     window.location.reload(false);
-  }
+  };
   const reject = () => {
     //Toast.currents.show({ severity: 'info', summary: 'Rejected', detail: 'You have rejected', life: 3000 });
-  }
+  };
   return (
     <>
-      <p style={{textAlign:'center'}}>Hola {Cookies.get('username')}</p>
-      <Menu model={items} style={{height:'95%', width:'100%'}} />
-
+      <p style={{ textAlign: "center" }}>Bienvenid@ {Cookies.get("username")}</p>
+      <Menu model={items} style={{ height: "100%", width: "100%" }} />
     </>
-  )
-}
+  );
+};
 export default MenuLateral;

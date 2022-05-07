@@ -1,5 +1,5 @@
 const DEV = "http://localhost:8080";
-//const PROD = "http://www.tacumba.es:3000" || "http://271.182.168.229:3000" || "http://localhost:3000";
+
 const HOST = DEV;
 
 //ej url: "/api/impresores"
@@ -54,22 +54,6 @@ export default class Http {
         const res = await fetch(`${HOST}${url}` )
         return await res.json()
     }
-
-    /*static getFile = async url => {
-        const res = await fetch(`${HOST}${url}`, {
-            credentials: "include",
-        }).then(response => {
-            console.log(response);
-            response.blob().then(blob => {
-                let aurl = window.URL.createObjectURL(blob);
-                let a = document.createElement('a');
-                a.href = aurl;
-                a.download = 'report.pdf';
-                return a;
-            });
-        });
-        return await res;
-    }*/
 
     static delete = async url => {
         const res = await fetch(`${HOST}${url}`, {

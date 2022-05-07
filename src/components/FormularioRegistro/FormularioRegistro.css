@@ -18,3 +18,18 @@
         min-width: 0;
     }
 }
+
+.field-impresores{
+    text-align: center;
+}
+
+.container-impresores{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.field-impresores-input{
+    text-align: center !important;
+}

@@ -1,0 +1,29 @@
+.layout-container{
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: minmax(100px,200px) minmax(500px,3fr);
+    grid-template-rows: 100px auto 100px;
+}
+
+.layout-header{
+    grid-column: 1/-1;
+    grid-row:1;
+    
+}
+
+.layout-sidebar{
+    grid-column: 1/2;
+    grid-row:2;
+}
+
+.layout-children{
+    grid-column: 2;
+    grid-row:2;
+    padding: 10px;
+}
+
+.layout-footer{
+    grid-column: 1/-1;
+    grid-row:3;
+}
