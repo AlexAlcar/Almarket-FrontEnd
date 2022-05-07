@@ -20,7 +20,10 @@ El objetivo último del proyecto es acercar la impresión 3d a todos los usuario
 Al acceder por primera vez los usuarios podrán registrarse o iniciar sesión si ya se han dado de alta.
 Una vez se ha iniciado sesión, habrá vistas comunes y otras que serán diferentes en función del tipo de usuario.
 
- 
+## Tecnologías utilizadas
+El portal está diseñado en React con la librería de componentes PrimeReact.
+El backEnd está desarrollado en NodeJS con express y Mongoose para conectar con una BBDD MongoDB.
+
 ## Dependencias/librerías
 - npm install
 - npm install primereact
