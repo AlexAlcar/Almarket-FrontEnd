@@ -22,8 +22,8 @@ Una vez se ha iniciado sesión, habrá vistas comunes y otras que serán diferen
 
  
 ## Dependencias/librerías
-npm install
-npm install primereact
-npm install primeicons
-npm install react-hook-form
-npm install react-transition-group
+- npm install
+- npm install primereact
+- npm install primeicons
+- npm install react-hook-form
+- npm install react-transition-group
