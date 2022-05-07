@@ -1,7 +1,5 @@
-import { Navigate } from "react-router";
 import { Card } from "primereact/card";
 import { Chart } from "primereact/chart";
-import { Divider } from "primereact/divider";
 import Http from "../Helpers/Http";
 import React, { useEffect, useState } from "react";
 //import 'primeflex/primeflex.css';

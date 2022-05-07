@@ -1,4 +1,3 @@
-import { Card } from "primereact/card";
 import { Splitter, SplitterPanel } from "primereact/splitter";
 import Cabecera from "./Cabecera/Cabecera";
 import Footer from "./Footer/Footer";

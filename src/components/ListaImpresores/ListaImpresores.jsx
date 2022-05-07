@@ -6,12 +6,8 @@ import { Rating } from "primereact/rating";
 import { Button } from "primereact/button";
 import { Toast } from "primereact/toast";
 import { Dialog } from "primereact/dialog";
-import { Dropdown } from "primereact/dropdown";
 import { confirmDialog, ConfirmDialog } from "primereact/confirmdialog";
 import Cookies from "js-cookie";
-import { InputText } from "primereact/inputtext";
-import { Calendar } from "primereact/calendar";
-import { addLocale } from "primereact/api";
 import { Card } from "primereact/card";
 import NuevoPedido from "../NuevoPedido/NuevoPedido";
 

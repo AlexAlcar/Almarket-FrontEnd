@@ -1,17 +1,15 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, {  useState } from "react";
 import Http from "../../Helpers/Http";
 import { useForm, Controller } from "react-hook-form";
 import { InputText } from "primereact/inputtext";
 import { Button } from "primereact/button";
 import { Card } from "primereact/card";
-import { Dropdown } from "primereact/dropdown";
 import { confirmDialog } from "primereact/confirmdialog";
 import { InputNumber } from "primereact/inputnumber";
 import { ToggleButton } from "primereact/togglebutton";
 import { InputMask } from "primereact/inputmask";
 import { Password } from "primereact/password";
 import { Checkbox } from "primereact/checkbox";
-import { Dialog } from "primereact/dialog";
 import { Divider } from "primereact/divider";
 import { classNames } from "primereact/utils";
 import "./FormularioRegistro.css";

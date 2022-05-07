@@ -4,16 +4,11 @@ import { useForm, Controller } from "react-hook-form";
 import { InputText } from "primereact/inputtext";
 import { Button } from "primereact/button";
 import { Card } from "primereact/card";
-import { Dropdown } from "primereact/dropdown";
 import { Password } from "primereact/password";
-import { Checkbox } from "primereact/checkbox";
-import { SelectButton } from "primereact/selectbutton";
 import { Dialog } from "primereact/dialog";
-import { ToggleButton } from "primereact/togglebutton";
 import { classNames } from "primereact/utils";
 import "./Login.css";
 import Cabecera from "../Cabecera/Cabecera";
-import { render } from "@testing-library/react";
 import FormularioRegistro from "../FormularioRegistro/FormularioRegistro";
 
 const Login = ({ authorized, setAuthorized }) => {

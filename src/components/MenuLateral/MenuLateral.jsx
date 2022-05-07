@@ -1,8 +1,6 @@
 import "primeicons/primeicons.css";
 import "primereact/resources/primereact.css";
-import { PanelMenu } from "primereact/panelmenu";
-import { ConfirmDialog, confirmDialog } from "primereact/confirmdialog";
-import { Chip } from "primereact/chip";
+import { confirmDialog } from "primereact/confirmdialog";
 import Cookies from "js-cookie";
 import { Menu } from "primereact/menu";
 import "./MenuLateral.css";

@@ -1,8 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
 import Http from "../../Helpers/Http";
-import { DataTable } from "primereact/datatable";
-import { Column } from "primereact/column";
-import { PrimeIcons } from "primereact/api";
 import { Toast } from "primereact/toast";
 import { Button } from "primereact/button";
 import Cookies from "js-cookie";
@@ -35,9 +32,8 @@ const NuevoPedido = ({ verNuevoPedido, impresorElegido, setverNuevoPedido }) => 
     comentarios: null,
     precioTotal: null,
     fichero: null,
-    estado: null,
   });
-  const [visibilidad, setVisibilidad] = useState(verNuevoPedido);
+  const [setVisibilidad] = useState(verNuevoPedido);
   addLocale("es", {
     firstDayOfWeek: 1,
     dayNames: ["domingo", "lunes", "martes", "miércoles", "jueves", "viernes", "sábado"],
@@ -74,14 +70,7 @@ const NuevoPedido = ({ verNuevoPedido, impresorElegido, setverNuevoPedido }) => 
     today: "Hoy",
     clear: "Claro",
   });
-  const showSuccess = () => {
-    toast.current.show({
-      severity: "success",
-      summary: "Pedido creado con éxito",
-      detail: 'Puedes hacer un seguimiento de tu pedido desde "Mis Pedidos"',
-      life: 3000,
-    });
-  };
+
   const borrarPedido = () => {
     setNuevoPedido({
       id_usuario: null,
@@ -99,7 +88,6 @@ const NuevoPedido = ({ verNuevoPedido, impresorElegido, setverNuevoPedido }) => 
       comentarios: null,
       precioTotal: null,
       fichero: null,
-      estado: null,
     });
   };
 

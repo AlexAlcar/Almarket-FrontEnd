@@ -1,6 +1,3 @@
-import { Image } from "primereact/image";
-import { Card } from "primereact/card";
-
 const Footer = () => {
   return (
     <div

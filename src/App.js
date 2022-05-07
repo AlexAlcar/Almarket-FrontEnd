@@ -2,10 +2,8 @@ import "primereact/resources/themes/bootstrap4-light-purple/theme.css"; //theme
 import "primereact/resources/primereact.min.css"; //core css
 import "primeicons/primeicons.css"; //icons
 import "./App.css";
-import React, { useState, useEffect, useCallback } from "react";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import FormularioRegistro from "./components/FormularioRegistro/FormularioRegistro";
-import Principal from "./components/Principal";
+import React, { useState, useEffect } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ListaImpresores from "./components/ListaImpresores/ListaImpresores";
 import DatosUsuario from "./components/DatosUsuario/DatosUsuario";
 import PantallaInicial from "./components/PantallaInicial";
