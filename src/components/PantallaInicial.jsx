@@ -2,12 +2,14 @@ import { Card } from "primereact/card";
 import { Chart } from "primereact/chart";
 import Http from "../Helpers/Http";
 import React, { useEffect, useState } from "react";
-//import 'primeflex/primeflex.css';
+import { StlViewer } from "react-stl-viewer";
 
 const PantallaInicial = ({ authorized }) => {
   //crear un array que será la fuente de datos en DATA
   const [chartUserData, setChartUserData] = useState([]);
   const [chartPedidosData, setChartPedidosData] = useState([]);
+  const [lastModel, setLastModel]=useState();
+  const [lastModel2, setLastModel2]=useState();
   const [chartUsuarios, setChartUsuarios] = useState({
     labels: ["Solicitantes", "Impresores"],
     datasets: [
@@ -51,7 +53,6 @@ const PantallaInicial = ({ authorized }) => {
       },
     },
   });
-
   const [basicData] = useState({
     labels: ["U1", "U2", "U3", "U4", "U5"],
     datasets: [
@@ -83,7 +84,6 @@ const PantallaInicial = ({ authorized }) => {
   };
   const { horizontalOptions } = getLightTheme();
 
-
   const getData = async () => {
     let conteoUsuarios = 0;
     let conteoImpresores = 0;
@@ -91,18 +91,18 @@ const PantallaInicial = ({ authorized }) => {
     let conteoPedidosImpr = 0;
     let conteoPedidosEnv = 0;
     let conteoPedidosFin = 0;
+
     const resUsuarios = await Http.get("/api/usuarios/");
     const resPedidos = await Http.get("/api/pedidos/");
 
-    //console.log(resPedidos.length);
+    setLastModel(resPedidos[resPedidos.length-1].fichero);
+    setLastModel2(resPedidos[resPedidos.length-2].fichero);
+    console.log(lastModel);
+    console.log(lastModel2);
+
     resUsuarios.forEach((e) => {
       if (e.perfil === "impresor") conteoImpresores++;
       else conteoUsuarios++;
-
-
-
-      //resUsuarios
-      //bresUsuariosjs.sort((a,b) => a.last_nom - b.last_nom);
     });
 
     resPedidos.forEach((e) => {
@@ -117,6 +117,9 @@ const PantallaInicial = ({ authorized }) => {
           conteoPedidosEnv++;
           break;
         case "finalizado":
+          conteoPedidosFin++;
+          break;
+        case "cerrado":
           conteoPedidosFin++;
           break;
         default:
@@ -155,7 +158,7 @@ const PantallaInicial = ({ authorized }) => {
     <>
       <div style={{ display: "flex" }}>
         <div>
-          <Card title="Estadísticas de usuarios" style={{ width: "40em", textAlign:'center' }}>
+          <Card title="Estadísticas de usuarios" style={{ width: "40em", textAlign: 'center' }}>
             <Chart
               type="doughnut"
               data={chartUsuarios}
@@ -165,7 +168,7 @@ const PantallaInicial = ({ authorized }) => {
           </Card>
         </div>
         <div>
-          <Card title="Estadísticas de pedidos" style={{ width: "40em", textAlign:'center' }}>
+          <Card title="Estadísticas de pedidos" style={{ width: "40em", textAlign: 'center', marginLeft:'5%' }}>
             <Chart
               type="doughnut"
               data={chartPedidos}
@@ -175,9 +178,41 @@ const PantallaInicial = ({ authorized }) => {
           </Card>
         </div>
       </div>
-      {/*<Card title="Top 5 usuarios" style={{ width: "80em", textAlign:'center' }}>
-      <Chart type="bar" data={basicData} options={horizontalOptions} style={{ width: "98%" }} />
-  </Card>*/}
+      <h1 style={{ textAlign: 'center' }}>Últimos modelos impresos</h1>
+      <div style={{ display: "flex"}}>
+        <div>
+          <Card style={{ width: "40em", textAlign: 'center', height:"40em"}}>
+            <StlViewer
+              style={{
+                top: 0,
+                left: 0,
+                width: '38em',
+                height: '35em'
+              }}
+              orbitControls
+              shadows
+              modelProps={{color:'blue'}}
+              url={`http://localhost:8080/uploads/${lastModel}`}
+            />
+          </Card>
+        </div>
+        <div>
+          <Card style={{ width: "40em", textAlign: 'center', height:"40em", marginLeft:'5%' }}>
+            <StlViewer
+              style={{
+                top: 0,
+                left: 0,
+                width: '38em',
+                height: '35em'
+              }}
+              orbitControls
+              shadows
+              modelProps={{color:'green'}}
+              url={`http://localhost:8080/uploads/${lastModel2}`}
+            />
+          </Card>
+        </div>
+      </div>
     </>
   );
 };

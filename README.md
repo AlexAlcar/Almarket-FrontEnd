@@ -30,3 +30,4 @@ El backEnd está desarrollado en NodeJS con express y Mongoose para conectar con
 - npm install primeicons
 - npm install react-hook-form
 - npm install react-transition-group
+- npm install --save react-stl-viewer
