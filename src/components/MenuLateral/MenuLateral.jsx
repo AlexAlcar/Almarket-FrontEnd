@@ -96,7 +96,6 @@ const MenuLateral = () => {
     window.location.reload(false);
   };
   const reject = () => {
-    //Toast.currents.show({ severity: 'info', summary: 'Rejected', detail: 'You have rejected', life: 3000 });
   };
   return (
     <>

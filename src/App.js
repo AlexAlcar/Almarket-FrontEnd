@@ -13,7 +13,6 @@ import Ayuda from "./components/Ayuda/Ayuda";
 import Login from "./components/Login/Login";
 import Contacto from "./components/Contacto/Contacto";
 import { Layout } from "./components/Layout";
-//import PrivateRoute from "./Helpers/PrivateRoute";
 
 function App() {
   const [authorized, setAuthorized] = useState(false);

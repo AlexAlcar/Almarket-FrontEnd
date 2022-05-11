@@ -8,8 +8,8 @@ const PantallaInicial = ({ authorized }) => {
   //crear un array que será la fuente de datos en DATA
   const [chartUserData, setChartUserData] = useState([]);
   const [chartPedidosData, setChartPedidosData] = useState([]);
-  const [lastModel, setLastModel]=useState();
-  const [lastModel2, setLastModel2]=useState();
+  const [lastModel, setLastModel] = useState();
+  const [lastModel2, setLastModel2] = useState();
   const [chartUsuarios, setChartUsuarios] = useState({
     labels: ["Solicitantes", "Impresores"],
     datasets: [
@@ -95,8 +95,8 @@ const PantallaInicial = ({ authorized }) => {
     const resUsuarios = await Http.get("/api/usuarios/");
     const resPedidos = await Http.get("/api/pedidos/");
 
-    setLastModel(resPedidos[resPedidos.length-1].fichero);
-    setLastModel2(resPedidos[resPedidos.length-2].fichero);
+    setLastModel(resPedidos[resPedidos.length - 1].fichero);
+    setLastModel2(resPedidos[resPedidos.length - 2].fichero);
     console.log(lastModel);
     console.log(lastModel2);
 
@@ -156,11 +156,11 @@ const PantallaInicial = ({ authorized }) => {
 
   return (
     <>
-      <div style={{ display: "flex", justifyContent: 'center', marginTop:'40px'  }}>
-        
+      <div style={{ display: "flex", justifyContent: 'center', marginTop: '40px' }}>
+
         <div>
-          <Card style={{display: "flex",marginLeft:'10%', justifyContent: 'center'}}>
-            <h2 style={{textAlign:'center', marginTop:'0px'}}>Estadísticas de usuarios</h2>
+          <Card style={{ display: "flex", marginLeft: '10%', justifyContent: 'center' }}>
+            <h2 style={{ textAlign: 'center', marginTop: '0px' }}>Estadísticas de usuarios</h2>
             <Chart
               type="doughnut"
               data={chartUsuarios}
@@ -170,8 +170,8 @@ const PantallaInicial = ({ authorized }) => {
           </Card>
         </div>
         <div>
-          <Card style={{ display: "flex",marginLeft:'10%', justifyContent: 'center' }}>
-          <h2 style={{textAlign:'center', marginTop:'0px'}}>Estadísticas de pedidos</h2>
+          <Card style={{ display: "flex", marginLeft: '10%', justifyContent: 'center' }}>
+            <h2 style={{ textAlign: 'center', marginTop: '0px' }}>Estadísticas de pedidos</h2>
             <Chart
               type="doughnut"
               data={chartPedidos}
@@ -181,10 +181,10 @@ const PantallaInicial = ({ authorized }) => {
           </Card>
         </div>
       </div>
-      <h1 style={{ textAlign: 'center', justifyContent: 'center'  }}>Últimos modelos impresos</h1>
+      <h1 style={{ textAlign: 'center', justifyContent: 'center' }}>Últimos modelos impresos</h1>
       <div style={{ display: "flex", justifyContent: 'center' }}>
         <div>
-          <Card style={{  textAlign: 'center', marginLeft:'10%' ,display: "flex", justifyContent: 'center'}}>
+          <Card style={{ textAlign: 'center', marginLeft: '10%', display: "flex", justifyContent: 'center' }}>
             <StlViewer
               style={{
                 top: 0,
@@ -194,13 +194,13 @@ const PantallaInicial = ({ authorized }) => {
               }}
               orbitControls
               shadows
-              modelProps={{color:'blue'}}
+              modelProps={{ color: 'blue' }}
               url={`http://localhost:8080/uploads/${lastModel}`}
             />
           </Card>
         </div>
         <div>
-          <Card style={{  textAlign: 'center', marginLeft:'10%', display: "flex", justifyContent: 'center' }}>
+          <Card style={{ textAlign: 'center', marginLeft: '10%', display: "flex", justifyContent: 'center' }}>
             <StlViewer
               style={{
                 top: 0,
@@ -210,7 +210,7 @@ const PantallaInicial = ({ authorized }) => {
               }}
               orbitControls
               shadows
-              modelProps={{color:'green'}}
+              modelProps={{ color: 'green' }}
               url={`http://localhost:8080/uploads/${lastModel2}`}
             />
           </Card>

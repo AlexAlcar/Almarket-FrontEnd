@@ -114,7 +114,7 @@ const ListaImpresores = ({ authorized }) => {
     //console.log("authorized:", authorized)
   }, []);
 
-  useEffect(() => {}, [loading]);
+  useEffect(() => { }, [loading]);
 
   return (
     <Card style={{ height: "50vw" }}>

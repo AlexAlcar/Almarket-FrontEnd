@@ -23,41 +23,41 @@ const Contacto = () => {
 
     emailjs.sendForm('service_1b5kh6j', 'template_rrvjtcj', e.target, 'cJ1ck9bRVuMecaVSC')
       .then((result) => {
-          console.log(result.text);
+        console.log(result.text);
       }, (error) => {
-          console.log(error.text);
+        console.log(error.text);
       });
-      showSuccess();
-      document.getElementById('form').reset()
+    showSuccess();
+    document.getElementById('form').reset()
   }
 
-  useEffect(() => {}, [toSubmit]);
+  useEffect(() => { }, [toSubmit]);
   return (
     <Card>
-    <div style={{display: "flex", justifyContent: 'center' }}>
-      
-      <Toast ref={toast} position="top-left" />
-      <form className="contact-form" onSubmit={sendEmail} id="form">
-      <h2 style={{textAlign:'center', marginTop:'0px'}}>Formulario de contacto</h2>
-      <p>Nombre: </p>
-      <InputText name="from_name"  />
-      <p>Correo: </p>
-      <InputText name="reply_to"  />
-      <p>Mensaje:</p>
-      <InputTextarea
-      style={{ height: "10rem", width:"40rem" }}
-      name="message" 
-      />
-      <br/>
-        <Button
-        type="submit"
-        label="Enviar consulta"
-        style={{ }}
-        alue="Send"
-      ></Button>
-    </form>
-      
-    </div>
+      <div style={{ display: "flex", justifyContent: 'center' }}>
+
+        <Toast ref={toast} position="top-left" />
+        <form className="contact-form" onSubmit={sendEmail} id="form">
+          <h2 style={{ textAlign: 'center', marginTop: '0px' }}>Formulario de contacto</h2>
+          <p>Nombre: </p>
+          <InputText name="from_name" />
+          <p>Correo: </p>
+          <InputText name="reply_to" />
+          <p>Mensaje:</p>
+          <InputTextarea
+            style={{ height: "10rem", width: "40rem" }}
+            name="message"
+          />
+          <br />
+          <Button
+            type="submit"
+            label="Enviar consulta"
+            style={{}}
+            alue="Send"
+          ></Button>
+        </form>
+
+      </div>
     </Card>
   );
 };

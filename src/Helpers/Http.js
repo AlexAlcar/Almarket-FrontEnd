@@ -1,5 +1,4 @@
 const DEV = "http://localhost:8080";
-
 const HOST = DEV;
 
 //ej url: "/api/impresores"
@@ -19,7 +18,7 @@ export default class Http {
         console.log(body);
         const request = this.getRequest(body, url, "POST")
         const res = await fetch(request)
-        console.log("respuesta:",res);
+        console.log("respuesta:", res);
         /*if (res){
             return ({message:"DB Problem: No puedes pasar!"});
         }*/
@@ -33,14 +32,14 @@ export default class Http {
         const config = {
             method: "POST",
             headers: {
-              "enctype": "multipart/form-data",
-              Accept: "application/json",
+                "enctype": "multipart/form-data",
+                Accept: "application/json",
             },
             body: formData,
-          };
+        };
 
         const res = await fetch(url, config);
-        
+
         return await res.json()
     }
 
@@ -51,7 +50,7 @@ export default class Http {
     }
 
     static get = async url => {
-        const res = await fetch(`${HOST}${url}` )
+        const res = await fetch(`${HOST}${url}`)
         return await res.json()
     }
 

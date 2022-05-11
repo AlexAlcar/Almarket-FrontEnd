@@ -157,128 +157,128 @@ const MisPedidos = () => {
     if (Cookies.get("rol") === "impresor") getPedidosImpresor();
   }, []);
 
-  useEffect(() => {}, [pedidos, pedidosImpresor]);
+  useEffect(() => { }, [pedidos, pedidosImpresor]);
 
   return (
     <Card>
-    <div style={{ height: "50vw" }}>
-      <Toast ref={toastTL} position="top-left" />
-      <DataTable
-        value={pedidos}
-        header="Pedidos realizados"
-        datakey="_id"
-        responsiveLayout="stack"
-        paginator
-        className="p-datatable-customers"
-        rows={5}
-        size="small"
-        emptyMessage="No se ha encontrado ningún pedido."
-      >
-        <Column field="_id" header="Pedido" sortable body={pedidoTemplate} />
-        <Column field="usuario_impresor" header="Impresor" />
-        <Column field="fecha_entrega" header="Fecha" sortable body={fEntregaTemplate} />
-        <Column field="direccion" header="Dirección" />
-        <Column field="estado" header="Estado" sortable body={statusTemplate} />
-        <Column field="material" header="Material" />
-        <Column field="color" header="Color" />
-        <Column field="tamanyo" header="Tamaño" sortable body={tamanyoTemplate} />
-        <Column field="precioTotal" header="Precio" sortable body={precioTemplate} />
-        <Column id="colValoracion" field="valoracion" header="Valorar" body={ratingTemplate} />
-        <Column field="descripcion" header="Descripción" />
-      </DataTable>
-      {Cookies.get("rol") === "impresor" ? (
-        <>
-          <Divider />
-          <DataTable
-            value={pedidosImpresor}
-            header="Pedidos recibidos/pendientes"
-            datakey="_id"
-            responsiveLayout="stack"
-            paginator
-            className="p-datatable-customers"
-            rows={5}
-            size="small"
-            emptyMessage="No se ha encontrado ningún pedido."
-          >
-            <Column
-              field="_id"
-              header="Pedido"
-              sortable
-              body={pedidoTemplate}
-              style={{ textAlign: "center" }}
-            />
-            <Column field="usuario" header="usuario" style={{ textAlign: "center" }} />
-            <Column
-              field="fecha_entrega"
-              header="Fecha"
-              sortable
-              body={fEntregaTemplate}
-              style={{ textAlign: "center" }}
-            />
-            <Column field="direccion" header="Dirección" style={{ textAlign: "center" }} />
-            <Column field="estado" header="Estado" sortable body={statusPrinterTemplate} />
-            <Column field="cantidad" header="Cantidad" style={{ textAlign: "center" }} />
-            <Column field="material" header="Material" style={{ textAlign: "center" }} />
-            <Column
-              field="tamanyo"
-              header="Tamaño"
-              sortable
-              body={tamanyoTemplate}
-              style={{ textAlign: "center" }}
-            />
-            <Column field="precioTotal" header="Precio" sortable body={precioTemplate} />
-            <Column field="descripcion" header="Descripción" />
-            <Column
-              field="fichero"
-              header="Descargar"
-              body={ficheroTemplate}
-              style={{ textAlign: "center" }}
-            />
-          </DataTable>
-        </>
-      ) : (
-        ""
-      )}
-      <div style={{ fontSize: "11px", marginTop: "1%" }}>
-        <h4>Leyenda:</h4>
-        <p>
-          <Tag
-            className="mr-2"
-            severity="info"
-            value="iniciado:"
-            style={{ fontSize: "11px" }}
-          ></Tag>{" "}
-          Se ha iniciado el pedido y ha llegado al impresor, pero todavía no se está imprimiendo
-        </p>
-        <p>
-          <Tag
-            className="mr-2"
-            severity="primary"
-            value="imprimiendo:"
-            style={{ fontSize: "11px" }}
-          ></Tag>{" "}
-          El pedido está en el proceso de impresión o post-procesado
-        </p>
-        <p>
-          <Tag
-            className="mr-2"
-            severity="warning"
-            value="enviado:"
-            style={{ fontSize: "11px" }}
-          ></Tag>{" "}
-          El pedido está en proceso de envío a la dirección de destino
-        </p>
-        <p>
-          <Tag
-            className="mr-2"
-            severity="success"
-            value="finalizado:"
-            style={{ fontSize: "11px" }}
-          ></Tag>{" "}
-          El pedido ha sido recibido por el cliente y ha finalizado
-        </p>
-      </div>{" "}
-    </div>
+      <div style={{ height: "50vw" }}>
+        <Toast ref={toastTL} position="top-left" />
+        <DataTable
+          value={pedidos}
+          header="Pedidos realizados"
+          datakey="_id"
+          responsiveLayout="stack"
+          paginator
+          className="p-datatable-customers"
+          rows={5}
+          size="small"
+          emptyMessage="No se ha encontrado ningún pedido."
+        >
+          <Column field="_id" header="Pedido" sortable body={pedidoTemplate} />
+          <Column field="usuario_impresor" header="Impresor" />
+          <Column field="fecha_entrega" header="Fecha" sortable body={fEntregaTemplate} />
+          <Column field="direccion" header="Dirección" />
+          <Column field="estado" header="Estado" sortable body={statusTemplate} />
+          <Column field="material" header="Material" />
+          <Column field="color" header="Color" />
+          <Column field="tamanyo" header="Tamaño" sortable body={tamanyoTemplate} />
+          <Column field="precioTotal" header="Precio" sortable body={precioTemplate} />
+          <Column id="colValoracion" field="valoracion" header="Valorar" body={ratingTemplate} />
+          <Column field="descripcion" header="Descripción" />
+        </DataTable>
+        {Cookies.get("rol") === "impresor" ? (
+          <>
+            <Divider />
+            <DataTable
+              value={pedidosImpresor}
+              header="Pedidos recibidos/pendientes"
+              datakey="_id"
+              responsiveLayout="stack"
+              paginator
+              className="p-datatable-customers"
+              rows={5}
+              size="small"
+              emptyMessage="No se ha encontrado ningún pedido."
+            >
+              <Column
+                field="_id"
+                header="Pedido"
+                sortable
+                body={pedidoTemplate}
+                style={{ textAlign: "center" }}
+              />
+              <Column field="usuario" header="usuario" style={{ textAlign: "center" }} />
+              <Column
+                field="fecha_entrega"
+                header="Fecha"
+                sortable
+                body={fEntregaTemplate}
+                style={{ textAlign: "center" }}
+              />
+              <Column field="direccion" header="Dirección" style={{ textAlign: "center" }} />
+              <Column field="estado" header="Estado" sortable body={statusPrinterTemplate} />
+              <Column field="cantidad" header="Cantidad" style={{ textAlign: "center" }} />
+              <Column field="material" header="Material" style={{ textAlign: "center" }} />
+              <Column
+                field="tamanyo"
+                header="Tamaño"
+                sortable
+                body={tamanyoTemplate}
+                style={{ textAlign: "center" }}
+              />
+              <Column field="precioTotal" header="Precio" sortable body={precioTemplate} />
+              <Column field="descripcion" header="Descripción" />
+              <Column
+                field="fichero"
+                header="Descargar"
+                body={ficheroTemplate}
+                style={{ textAlign: "center" }}
+              />
+            </DataTable>
+          </>
+        ) : (
+          ""
+        )}
+        <div style={{ fontSize: "11px", marginTop: "1%" }}>
+          <h4>Leyenda:</h4>
+          <p>
+            <Tag
+              className="mr-2"
+              severity="info"
+              value="iniciado:"
+              style={{ fontSize: "11px" }}
+            ></Tag>{" "}
+            Se ha iniciado el pedido y ha llegado al impresor, pero todavía no se está imprimiendo
+          </p>
+          <p>
+            <Tag
+              className="mr-2"
+              severity="primary"
+              value="imprimiendo:"
+              style={{ fontSize: "11px" }}
+            ></Tag>{" "}
+            El pedido está en el proceso de impresión o post-procesado
+          </p>
+          <p>
+            <Tag
+              className="mr-2"
+              severity="warning"
+              value="enviado:"
+              style={{ fontSize: "11px" }}
+            ></Tag>{" "}
+            El pedido está en proceso de envío a la dirección de destino
+          </p>
+          <p>
+            <Tag
+              className="mr-2"
+              severity="success"
+              value="finalizado:"
+              style={{ fontSize: "11px" }}
+            ></Tag>{" "}
+            El pedido ha sido recibido por el cliente y ha finalizado
+          </p>
+        </div>{" "}
+      </div>
     </Card>
   );
 };
