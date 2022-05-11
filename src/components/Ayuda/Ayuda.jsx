@@ -1,9 +1,11 @@
 import { Accordion, AccordionTab } from "primereact/accordion";
+import { Card } from "primereact/card";
 
 const Ayuda = () => {
   return (
+    <Card>
     <div>
-      <h1 style={{ textAlign: "center" }}>Preguntas frecuentes</h1>
+      <h1 style={{ textAlign: "center", marginTop:'0px' }}>Preguntas frecuentes</h1>
       <Accordion multiple>
         <AccordionTab header="¿Usar la plataforma tiene algún coste?">
           <p>
@@ -58,6 +60,7 @@ const Ayuda = () => {
         </AccordionTab>
       </Accordion>
     </div>
+    </Card>
   );
 };
 export default Ayuda;

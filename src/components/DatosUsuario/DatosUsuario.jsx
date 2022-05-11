@@ -8,6 +8,7 @@ import { Inplace, InplaceDisplay, InplaceContent } from "primereact/inplace";
 import { InputNumber } from "primereact/inputnumber";
 import { InputText } from "primereact/inputtext";
 import { Button } from "primereact/button";
+import { Card } from "primereact/card";
 
 const DatosUsuario = () => {
   const toastTL = useRef(null);
@@ -104,10 +105,11 @@ const DatosUsuario = () => {
       ></ConfirmDialog>
 
       <Toast ref={toastTL} position="top-left" />
-      <Divider align="left" type="dashed">
-        <b>Datos de usuario</b>
-      </Divider>
-      <div style={{ height: "50vw", margin: "1%", display: "flex" }}>
+     
+        
+     <Card>
+     <h2 style={{textAlign:'center', marginTop:'0px'}}>Datos de tu cuenta</h2>
+      <div style={{ height: "50vw", margin: "1%", display: "flex", justifyContent: 'center' }}>
         <div class="flex align-items-center justify-content-center">
           <h5>Nombre: </h5>
           <Inplace closable>
@@ -256,6 +258,7 @@ const DatosUsuario = () => {
 
         <br />
       </div>
+      </Card>
     </>
   );
 };

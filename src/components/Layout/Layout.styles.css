@@ -1,5 +1,5 @@
 .layout-container{
-    width: 100vw;
+    width: 99vw;
     height: 100vh;
     display: grid;
     grid-template-columns: minmax(100px,200px) minmax(500px,3fr);
@@ -21,6 +21,7 @@
     grid-column: 2;
     grid-row:2;
     padding: 10px;
+    display: 'flex';
 }
 
 .layout-footer{

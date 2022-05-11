@@ -156,38 +156,41 @@ const PantallaInicial = ({ authorized }) => {
 
   return (
     <>
-      <div style={{ display: "flex" }}>
+      <div style={{ display: "flex", justifyContent: 'center', marginTop:'40px'  }}>
+        
         <div>
-          <Card title="Estadísticas de usuarios" style={{ width: "40em", textAlign: 'center' }}>
+          <Card style={{display: "flex",marginLeft:'10%', justifyContent: 'center'}}>
+            <h2 style={{textAlign:'center', marginTop:'0px'}}>Estadísticas de usuarios</h2>
             <Chart
               type="doughnut"
               data={chartUsuarios}
               options={lightOptions}
-              style={{ width: "30em" }}
+              style={{ width: "33em" }}
             />
           </Card>
         </div>
         <div>
-          <Card title="Estadísticas de pedidos" style={{ width: "40em", textAlign: 'center', marginLeft:'5%' }}>
+          <Card style={{ display: "flex",marginLeft:'10%', justifyContent: 'center' }}>
+          <h2 style={{textAlign:'center', marginTop:'0px'}}>Estadísticas de pedidos</h2>
             <Chart
               type="doughnut"
               data={chartPedidos}
               options={lightOptions2}
-              style={{ width: "30em" }}
+              style={{ width: "33em" }}
             />
           </Card>
         </div>
       </div>
-      <h1 style={{ textAlign: 'center' }}>Últimos modelos impresos</h1>
-      <div style={{ display: "flex"}}>
+      <h1 style={{ textAlign: 'center', justifyContent: 'center'  }}>Últimos modelos impresos</h1>
+      <div style={{ display: "flex", justifyContent: 'center' }}>
         <div>
-          <Card style={{ width: "40em", textAlign: 'center', height:"40em"}}>
+          <Card style={{  textAlign: 'center', marginLeft:'10%' ,display: "flex", justifyContent: 'center'}}>
             <StlViewer
               style={{
                 top: 0,
                 left: 0,
-                width: '38em',
-                height: '35em'
+                width: '33em',
+                height: '33em'
               }}
               orbitControls
               shadows
@@ -197,13 +200,13 @@ const PantallaInicial = ({ authorized }) => {
           </Card>
         </div>
         <div>
-          <Card style={{ width: "40em", textAlign: 'center', height:"40em", marginLeft:'5%' }}>
+          <Card style={{  textAlign: 'center', marginLeft:'10%', display: "flex", justifyContent: 'center' }}>
             <StlViewer
               style={{
                 top: 0,
                 left: 0,
-                width: '38em',
-                height: '35em'
+                width: '33em',
+                height: '33em'
               }}
               orbitControls
               shadows

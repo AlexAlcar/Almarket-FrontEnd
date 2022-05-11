@@ -9,6 +9,7 @@ import { Tag } from "primereact/tag";
 import { Button } from "primereact/button";
 import { Toast } from "primereact/toast";
 import { Divider } from "primereact/divider";
+import { Card } from "primereact/card";
 
 const MisPedidos = () => {
   const toastTL = useRef(null);
@@ -159,9 +160,9 @@ const MisPedidos = () => {
   useEffect(() => {}, [pedidos, pedidosImpresor]);
 
   return (
+    <Card>
     <div style={{ height: "50vw" }}>
       <Toast ref={toastTL} position="top-left" />
-      <h2>&nbsp;Todos los pedidos</h2>
       <DataTable
         value={pedidos}
         header="Pedidos realizados"
@@ -278,6 +279,7 @@ const MisPedidos = () => {
         </p>
       </div>{" "}
     </div>
+    </Card>
   );
 };
 export default MisPedidos;
