@@ -62,7 +62,7 @@ const Login = ({ authorized, setAuthorized }) => {
       >
         <Card
           title="Iniciar Sesión"
-          style={{ width: "55rem", marginBottom: "2em", textAlign: "center" }}
+          style={{ width: "55rem", marginBottom: "2em", textAlign: "center", border:"ridge", borderColor:'white' }}
         >
           <div className="form-demo">
             <div className="flex justify-content-center">

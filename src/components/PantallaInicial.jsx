@@ -3,6 +3,7 @@ import { Chart } from "primereact/chart";
 import Http from "../Helpers/Http";
 import React, { useEffect, useState } from "react";
 import { StlViewer } from "react-stl-viewer";
+import { Divider } from "primereact/divider";
 
 const PantallaInicial = ({ authorized }) => {
   //crear un array que será la fuente de datos en DATA
@@ -165,7 +166,7 @@ const PantallaInicial = ({ authorized }) => {
               type="doughnut"
               data={chartUsuarios}
               options={lightOptions}
-              style={{ width: "33em" }}
+              style={{ width: "35em" }}
             />
           </Card>
         </div>
@@ -176,12 +177,15 @@ const PantallaInicial = ({ authorized }) => {
               type="doughnut"
               data={chartPedidos}
               options={lightOptions2}
-              style={{ width: "33em" }}
+              style={{ width: "35em" }}
             />
           </Card>
         </div>
       </div>
-      <h1 style={{ textAlign: 'center', justifyContent: 'center' }}>Últimos modelos impresos</h1>
+      <Divider align="center">
+                    <h1 >Últimos modelos impresos</h1>
+                </Divider>
+      
       <div style={{ display: "flex", justifyContent: 'center' }}>
         <div>
           <Card style={{ textAlign: 'center', marginLeft: '10%', display: "flex", justifyContent: 'center' }}>
@@ -189,7 +193,7 @@ const PantallaInicial = ({ authorized }) => {
               style={{
                 top: 0,
                 left: 0,
-                width: '33em',
+                width: '35em',
                 height: '33em'
               }}
               orbitControls
@@ -205,7 +209,7 @@ const PantallaInicial = ({ authorized }) => {
               style={{
                 top: 0,
                 left: 0,
-                width: '33em',
+                width: '35em',
                 height: '33em'
               }}
               orbitControls

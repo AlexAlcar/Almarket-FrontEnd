@@ -33,6 +33,7 @@ const ListaImpresores = ({ authorized }) => {
     usuario: null,
     valoraciones: null,
     _id: null,
+    stars:null,
   });
   const [visible, setVisible] = useState(false);
   const toast = useRef(null);
@@ -40,7 +41,12 @@ const ListaImpresores = ({ authorized }) => {
   const getListaImpresores = async () => {
     const dataSource = await Http.get("/api/usuarios/getImpresores");
     //console.log(dataSource);
+    
     setImpresores(dataSource);
+    impresores.map((e)=>{
+      if (e.perfil==='impresor') e.stars=e.puntuacion/e.valoraciones;
+    });
+    console.log(impresores);
   };
 
   const ratingTemplate = (rowData) => {
@@ -96,6 +102,7 @@ const ListaImpresores = ({ authorized }) => {
                 usuario: rowData.usuario,
                 valoraciones: null,
                 _id: rowData._id,
+                stars:null,
               });
               //console.log(impresorElegido.usuario);
               if (rowData._id == Cookies.get("_id")) {
@@ -108,9 +115,12 @@ const ListaImpresores = ({ authorized }) => {
       />
     );
   };
+ 
+
 
   useEffect(() => {
     getListaImpresores();
+    
     //console.log("authorized:", authorized)
   }, []);
 
@@ -177,7 +187,6 @@ const ListaImpresores = ({ authorized }) => {
           header="Valoraciones"
           body={ratingTemplate}
           sortable
-          sortField="puntuacion"
         />
         <Column body={handleClickNuevoPedido} />
       </DataTable>

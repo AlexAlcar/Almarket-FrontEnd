@@ -106,7 +106,7 @@ const NuevoPedido = ({ verNuevoPedido, impresorElegido, setverNuevoPedido }) => 
     if (!nuevoPedido.material) chequeoDatos("Debes elegir un material");
     if (!nuevoPedido.tamanyo) chequeoDatos("Debes elegir un tamaño mínimo");
     if (!nuevoPedido.color) chequeoDatos("Debes elegir un color");
-    if (!nuevoPedido.descripcion) chequeoDatos("Debes escribir una descripción");
+    //if (!nuevoPedido.descripcion) chequeoDatos("Debes escribir una descripción");
     if (!nuevoPedido.fichero) chequeoDatos("Debes subir un modelo antes de crear el pedido");
     //console.log("Fichero: ", fichero);
     console.log("Impresor elegido: ", impresorElegido);
@@ -242,7 +242,7 @@ const NuevoPedido = ({ verNuevoPedido, impresorElegido, setverNuevoPedido }) => 
               <InputTextarea
                 id="color"
                 style={{ height: "150px" }}
-                placeholder="Descripción / Datos adicionales"
+                placeholder="Observaciones / Datos adicionales"
                 onChange={(e) => setNuevoPedido({ ...nuevoPedido, descripcion: e.target.value })}
               />
 

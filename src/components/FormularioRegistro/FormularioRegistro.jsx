@@ -407,29 +407,7 @@ const FormularioRegistro = ({ setDisplayRegister }) => {
                 </span>
                 {getFormErrorMessage("password")}
               </div>
-              <div className="field-checkbox">
-                <Controller
-                  name="accept"
-                  control={control}
-                  rules={{ required: true }}
-                  render={({ field, fieldState }) => (
-                    <Checkbox
-                      inputId={field.name}
-                      onChange={(e) => field.onChange(e.checked)}
-                      checked={field.value}
-                      className={classNames({
-                        "p-invalid": fieldState.invalid,
-                      })}
-                    />
-                  )}
-                />
-                <label
-                  htmlFor="accept"
-                  className={classNames({ "p-error": errors.accept })}
-                >
-                  {" "}
-                  Acepto los términos y condiciones*
-                </label>
+              <div className="field-checkbox">                
               </div>
               &nbsp;
               <Button type="submit" label="Submit" className="mt-2" />
