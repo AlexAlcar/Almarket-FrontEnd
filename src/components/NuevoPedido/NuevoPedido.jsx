@@ -259,7 +259,7 @@ const NuevoPedido = ({ verNuevoPedido, impresorElegido, setverNuevoPedido }) => 
                       <FileUpload
                         name="stl"
                         mode="basic"
-                        url="http://localhost:8080/api/pedidos/subirSTL"
+                        url="https://almarket-backend.herokuapp.com/api/pedidos/subirSTL"
                         onUpload={(res) => {
                           console.log(res.xhr.response);
                           //let tmp=JSON.parse(res.xhr.response);

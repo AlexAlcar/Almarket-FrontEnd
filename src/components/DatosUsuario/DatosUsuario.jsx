@@ -107,10 +107,10 @@ const DatosUsuario = () => {
 
 
       <Card>
-        <h2 style={{ textAlign: 'center', marginTop: '0px' }}>Datos de tu cuenta</h2>
+        <h1 style={{ textAlign: 'center', marginTop: '0px' }}>Datos de la cuenta</h1>
         <div style={{ height: "50vw", margin: "1%", display: "flex", justifyContent: 'center' }}>
           <div class="flex align-items-center justify-content-center">
-            <h5>Nombre: </h5>
+            <h3>Nombre: </h3>
             <Inplace closable>
               <InplaceDisplay>{userData.nombre || "Haz clic para editar"}</InplaceDisplay>
               <InplaceContent>
@@ -121,7 +121,7 @@ const DatosUsuario = () => {
                 />
               </InplaceContent>
             </Inplace>
-            <h5>Primer Apellido: </h5>
+            <h3>Primer Apellido: </h3>
             <Inplace closable>
               <InplaceDisplay>
                 {userData.apellido1 || "Haz clic para editar"}
@@ -135,7 +135,7 @@ const DatosUsuario = () => {
               </InplaceContent>
             </Inplace>
 
-            <h5>Segundo Apellido: </h5>
+            <h3>Segundo Apellido: </h3>
             <Inplace closable>
               <InplaceDisplay>
                 {userData.apellido2 || "Haz clic para editar"}
@@ -149,7 +149,7 @@ const DatosUsuario = () => {
               </InplaceContent>
             </Inplace>
 
-            <h5>Correo electrónico </h5>
+            <h3>Correo electrónico </h3>
             <Inplace closable>
               <InplaceDisplay>{userData.email || "Haz clic para editar"}</InplaceDisplay>
               <InplaceContent>
@@ -161,7 +161,7 @@ const DatosUsuario = () => {
               </InplaceContent>
             </Inplace>
 
-            <h5>Teléfono </h5>
+            <h3>Teléfono </h3>
             <Inplace closable>
               <InplaceDisplay>{userData.telefono || "Haz clic para editar"}</InplaceDisplay>
               <InplaceContent>
@@ -173,7 +173,7 @@ const DatosUsuario = () => {
               </InplaceContent>
             </Inplace>
 
-            <h5>Dirección </h5>
+            <h3>Dirección </h3>
             <Inplace closable>
               <InplaceDisplay>
                 {userData.direccion || "Haz clic para editar"}
@@ -199,7 +199,7 @@ const DatosUsuario = () => {
 
           {userData.perfil === "impresor" ? (
             <div style={{ marginLeft: "10% " }}>
-              <h5>Nº de impresoras </h5>
+              <h4>Nº de impresoras </h4>
               <InputNumber
                 style={{ width: "10px " }}
                 value={userData.impresoras}
@@ -216,7 +216,7 @@ const DatosUsuario = () => {
                 decrementButtonIcon="pi pi-minus"
               />
 
-              <h5>Tamaño de impresión </h5>
+              <h4>Tamaño de impresión </h4>
               <InputNumber
                 value={userData.tamanyo}
                 onValueChange={(e) => setUserData({ ...userData, tamanyo: e.value })}
@@ -233,7 +233,7 @@ const DatosUsuario = () => {
                 decrementButtonIcon="pi pi-minus"
               />
 
-              <h5>Precio por unidad</h5>
+              <h4>Precio por unidad</h4>
               <InputNumber
                 value={userData.precio}
                 onValueChange={(e) => setUserData({ ...userData, precio: e.value })}

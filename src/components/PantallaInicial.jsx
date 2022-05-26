@@ -199,7 +199,7 @@ const PantallaInicial = ({ authorized }) => {
               orbitControls
               shadows
               modelProps={{ color: 'blue' }}
-              url={`http://localhost:8080/uploads/${lastModel}`}
+              url={`https://almarket-backend.herokuapp.com/uploads/${lastModel}`}
             />
           </Card>
         </div>
@@ -215,7 +215,7 @@ const PantallaInicial = ({ authorized }) => {
               orbitControls
               shadows
               modelProps={{ color: 'green' }}
-              url={`http://localhost:8080/uploads/${lastModel2}`}
+              url={`https://almarket-backend.herokuapp.com/uploads/${lastModel2}`}
             />
           </Card>
         </div>

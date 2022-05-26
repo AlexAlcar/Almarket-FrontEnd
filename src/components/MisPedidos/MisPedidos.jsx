@@ -108,7 +108,7 @@ const MisPedidos = () => {
           icon="pi pi-download"
           className="p-button-rounded p-button-outlined"
           type="submit"
-          onClick={() => window.open(`http://localhost:8080/uploads/${rowData.fichero}`)}
+          onClick={() => window.open(`https://almarket-backend.herokuapp.com/uploads/${rowData.fichero}`)}
         />
       );
   };

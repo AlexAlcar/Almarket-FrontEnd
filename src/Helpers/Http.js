@@ -1,5 +1,6 @@
 const DEV = "http://localhost:8080";
-const HOST = DEV;
+const PROD= "https://almarket-backend.herokuapp.com";
+const HOST = PROD;
 
 //ej url: "/api/impresores"
 export default class Http {
