@@ -67,7 +67,7 @@ const MenuLateral = () => {
         {
           label: "Facebook",
           icon: "pi pi-facebook",
-          url: "https://www.facebook.com/",
+          url: "https://www.facebook.com/Almarket3D-114142701306067",
         },
         {
           label: "Twitter",
@@ -90,16 +90,19 @@ const MenuLateral = () => {
 
   const accept = () => {
     console.log("accept");
-    document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-    document.cookie = "_id=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-    document.cookie = "rol=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    //document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    //document.cookie = "_id=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    //document.cookie = "rol=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    window.localStorage.removeItem('username');
+    window.localStorage.removeItem('_id');
+    window.localStorage.removeItem('rol');
     window.location.reload(false);
   };
   const reject = () => {
   };
   return (
     <>
-      <p style={{ textAlign: "center" }}>Bienvenid@ {Cookies.get("username")}</p>
+      <p style={{ textAlign: "center" }}>Bienvenid@ {window.localStorage.getItem('username')}</p>
       <Menu model={items} style={{ height: "100%", width: "100%" }} />
     </>
   );

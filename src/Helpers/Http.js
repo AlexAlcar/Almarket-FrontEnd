@@ -1,6 +1,7 @@
-const DEV = "http://localhost:8080";
+//const DEV = "http://localhost:8000";
+const DEV = "http://84.127.70.11:8000";
 const PROD= "https://almarket-backend.herokuapp.com";
-const HOST = PROD;
+const HOST = DEV;
 
 //ej url: "/api/impresores"
 export default class Http {
@@ -10,6 +11,7 @@ export default class Http {
             body: JSON.stringify(data),
             headers: {
                 "Content-Type": "application/json",
+                "Access-Control-Allow-Private-Network": "true",
             }
         }
         return new Request(`${HOST}${url}`, init)
@@ -34,6 +36,7 @@ export default class Http {
             method: "POST",
             headers: {
                 "enctype": "multipart/form-data",
+                "Access-Control-Allow-Private-Network": "true",
                 Accept: "application/json",
             },
             body: formData,

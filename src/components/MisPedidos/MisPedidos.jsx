@@ -18,12 +18,12 @@ const MisPedidos = () => {
   const [currentUser, setCurrentUser] = useState("");
 
   const getPedidos = async () => {
-    const res = await Http.get(`/api/pedidos/getByUser=${Cookies.get("_id")}`);
+    const res = await Http.get(`/api/pedidos/getByUser=${window.localStorage.getItem('_id')}`);
     setPedidos(res);
   };
 
   const getPedidosImpresor = async () => {
-    const res = await Http.get(`/api/pedidos/getByPrinter=${Cookies.get("_id")}`);
+    const res = await Http.get(`/api/pedidos/getByPrinter=${window.localStorage.getItem('_id')}`);
     console.log(res);
     setPedidosImpresor(res);
   };
@@ -108,7 +108,7 @@ const MisPedidos = () => {
           icon="pi pi-download"
           className="p-button-rounded p-button-outlined"
           type="submit"
-          onClick={() => window.open(`https://almarket-backend.herokuapp.com/uploads/${rowData.fichero}`)}
+          onClick={() => window.open(`http://84.127.70.11:8000/uploads/${rowData.fichero}`)}
         />
       );
   };
@@ -153,8 +153,8 @@ const MisPedidos = () => {
 
   useEffect(() => {
     getPedidos();
-    setCurrentUser(Cookies.get("username"));
-    if (Cookies.get("rol") === "impresor") getPedidosImpresor();
+    setCurrentUser(window.localStorage.getItem('username'));
+    if (window.localStorage.getItem('rol') === "impresor") getPedidosImpresor();
   }, []);
 
   useEffect(() => { }, [pedidos, pedidosImpresor]);
@@ -186,7 +186,7 @@ const MisPedidos = () => {
           <Column id="colValoracion" field="valoracion" header="Valorar" body={ratingTemplate} />
           <Column field="descripcion" header="Descripción" />
         </DataTable>
-        {Cookies.get("rol") === "impresor" ? (
+        {window.localStorage.getItem('rol') === "impresor" ? (
           <>
             <Divider />
             <DataTable

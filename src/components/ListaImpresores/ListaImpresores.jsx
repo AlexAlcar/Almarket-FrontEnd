@@ -105,7 +105,8 @@ const ListaImpresores = ({ authorized }) => {
                 stars:null,
               });
               //console.log(impresorElegido.usuario);
-              if (rowData._id == Cookies.get("_id")) {
+              //if (rowData._id == Cookies.get("_id")) {
+                if (rowData._id == window.localStorage.getItem('_id')) {
                 setFoolDetector(true);
                 setLoading(false);
               } else setverNuevoPedido(true);

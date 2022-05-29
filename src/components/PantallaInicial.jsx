@@ -11,6 +11,7 @@ const PantallaInicial = ({ authorized }) => {
   const [chartPedidosData, setChartPedidosData] = useState([]);
   const [lastModel, setLastModel] = useState();
   const [lastModel2, setLastModel2] = useState();
+  const [loaded, setLoaded]=useState(false);
   const [chartUsuarios, setChartUsuarios] = useState({
     labels: ["Solicitantes", "Impresores"],
     datasets: [
@@ -96,11 +97,13 @@ const PantallaInicial = ({ authorized }) => {
     const resUsuarios = await Http.get("/api/usuarios/");
     const resPedidos = await Http.get("/api/pedidos/");
 
-    setLastModel(resPedidos[resPedidos.length - 1].fichero);
-    setLastModel2(resPedidos[resPedidos.length - 2].fichero);
-    console.log(lastModel);
-    console.log(lastModel2);
-
+    //setLastModel(resPedidos[resPedidos.length - 1].fichero);
+    //setLastModel2(resPedidos[resPedidos.length - 2].fichero);
+    //console.log(resPedidos);
+    //console.log(lastModel);
+    //console.log(lastModel2);
+    window.localStorage.setItem('lastmodel1', resPedidos[resPedidos.length - 1].fichero);
+    window.localStorage.setItem('lastmodel2', resPedidos[resPedidos.length - 2].fichero);
     resUsuarios.forEach((e) => {
       if (e.perfil === "impresor") conteoImpresores++;
       else conteoUsuarios++;
@@ -155,6 +158,10 @@ const PantallaInicial = ({ authorized }) => {
     getData();
   }, []);
 
+  useEffect(() => {
+   if (lastModel) setLoaded(true);
+  }, [lastModel]);
+
   return (
     <>
       <div style={{ display: "flex", justifyContent: 'center', marginTop: '40px' }}>
@@ -186,6 +193,7 @@ const PantallaInicial = ({ authorized }) => {
                     <h1 >Últimos modelos impresos</h1>
                 </Divider>
       
+      
       <div style={{ display: "flex", justifyContent: 'center' }}>
         <div>
           <Card style={{ textAlign: 'center', marginLeft: '10%', display: "flex", justifyContent: 'center' }}>
@@ -199,7 +207,7 @@ const PantallaInicial = ({ authorized }) => {
               orbitControls
               shadows
               modelProps={{ color: 'blue' }}
-              url={`https://almarket-backend.herokuapp.com/uploads/${lastModel}`}
+              url={`http://84.127.70.11:8000/uploads/${window.localStorage.getItem('lastmodel1')}`}
             />
           </Card>
         </div>
@@ -215,7 +223,9 @@ const PantallaInicial = ({ authorized }) => {
               orbitControls
               shadows
               modelProps={{ color: 'green' }}
-              url={`https://almarket-backend.herokuapp.com/uploads/${lastModel2}`}
+              crossOrigin='null'
+              url={`http://84.127.70.11:8000/uploads/${window.localStorage.getItem('lastmodel2')}`}
+              
             />
           </Card>
         </div>

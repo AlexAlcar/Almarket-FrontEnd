@@ -18,7 +18,7 @@ function App() {
   const [authorized, setAuthorized] = useState(false);
 
   useEffect(() => {
-    if (document.cookie) {
+    if (document.cookie ||window.localStorage.getItem('_id')) {
       //No solo hay que comprobar que haya cookie, también que los datos sean válidos (evitar falseo copiando cookie)
       setAuthorized(true);
     }

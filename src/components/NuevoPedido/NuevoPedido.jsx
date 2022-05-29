@@ -103,15 +103,15 @@ const NuevoPedido = ({ verNuevoPedido, impresorElegido, setverNuevoPedido }) => 
   const prepararNuevoPedido = () => {
     //Compruebo datos y termino de preparar el objeto a enviar.
     if (!nuevoPedido.cantidad) chequeoDatos("Debes elegir una cantidad");
-    if (!nuevoPedido.material) chequeoDatos("Debes elegir un material");
-    if (!nuevoPedido.tamanyo) chequeoDatos("Debes elegir un tamaño mínimo");
-    if (!nuevoPedido.color) chequeoDatos("Debes elegir un color");
-    //if (!nuevoPedido.descripcion) chequeoDatos("Debes escribir una descripción");
-    if (!nuevoPedido.fichero) chequeoDatos("Debes subir un modelo antes de crear el pedido");
+    else if (!nuevoPedido.material) chequeoDatos("Debes elegir un material");
+    else if (!nuevoPedido.tamanyo) chequeoDatos("Debes elegir un tamaño mínimo");
+    else if (!nuevoPedido.color) chequeoDatos("Debes elegir un color");
+    else if (!nuevoPedido.fichero) chequeoDatos("Debes subir un modelo antes de crear el pedido");
+    else crearPedido();
     //console.log("Fichero: ", fichero);
     console.log("Impresor elegido: ", impresorElegido);
     console.log("Nuevo Pedido: ", nuevoPedido);
-    crearPedido();
+    
   };
 
   const crearPedido = async () => {
@@ -132,8 +132,8 @@ const NuevoPedido = ({ verNuevoPedido, impresorElegido, setverNuevoPedido }) => 
     //guardo en el pedido los Id's del solicitante y el impresor
     setNuevoPedido({
       ...setNuevoPedido,
-      id_usuario: Cookies.get("_id"),
-      usuario: Cookies.get("username"),
+      id_usuario: window.localStorage.getItem('_id'),
+      usuario: window.localStorage.getItem('username'),
       id_impresor: impresorElegido._id,
       usuario_impresor: impresorElegido.usuario,
       direccion: impresorElegido.direccion,
@@ -259,7 +259,7 @@ const NuevoPedido = ({ verNuevoPedido, impresorElegido, setverNuevoPedido }) => 
                       <FileUpload
                         name="stl"
                         mode="basic"
-                        url="https://almarket-backend.herokuapp.com/api/pedidos/subirSTL"
+                        url="http://84.127.70.11:8000/api/pedidos/subirSTL"
                         onUpload={(res) => {
                           console.log(res.xhr.response);
                           //let tmp=JSON.parse(res.xhr.response);
@@ -271,7 +271,7 @@ const NuevoPedido = ({ verNuevoPedido, impresorElegido, setverNuevoPedido }) => 
                           setFicheroSubido(true);
                         }}
                         accept=".stl"
-                        maxFileSize={1000000}
+                        maxFileSize={10000000}
                       />
                     </>
                   )}

@@ -53,7 +53,7 @@ const DatosUsuario = () => {
     var regexMail =
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     if (regex.test(userData.nombre)) {
-      setAlertMessage("Introduce un nombre vlaído");
+      setAlertMessage("Introduce un nombre válido");
       setAlertVisible(true);
     } else if (regex.test(userData.apellido1) || regex.test(userData.apellido2)) {
       setAlertMessage("Introduce solo letras");
@@ -77,7 +77,9 @@ const DatosUsuario = () => {
   };
 
   useEffect(() => {
-    let id = Cookies.get("_id");
+    //let id = Cookies.get("_id");
+    let id = window.localStorage.getItem('_id');
+    
     getDatosUsuario(id);
   }, []);
 
