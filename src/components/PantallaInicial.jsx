@@ -97,11 +97,7 @@ const PantallaInicial = ({ authorized }) => {
     const resUsuarios = await Http.get("/api/usuarios/");
     const resPedidos = await Http.get("/api/pedidos/");
 
-    //setLastModel(resPedidos[resPedidos.length - 1].fichero);
-    //setLastModel2(resPedidos[resPedidos.length - 2].fichero);
-    //console.log(resPedidos);
-    //console.log(lastModel);
-    //console.log(lastModel2);
+
     window.localStorage.setItem('lastmodel1', resPedidos[resPedidos.length - 1].fichero);
     window.localStorage.setItem('lastmodel2', resPedidos[resPedidos.length - 2].fichero);
     resUsuarios.forEach((e) => {
@@ -173,7 +169,7 @@ const PantallaInicial = ({ authorized }) => {
               type="doughnut"
               data={chartUsuarios}
               options={lightOptions}
-              style={{ width: "35em" }}
+              style={{ width: "35vw" }}
             />
           </Card>
         </div>
@@ -184,7 +180,7 @@ const PantallaInicial = ({ authorized }) => {
               type="doughnut"
               data={chartPedidos}
               options={lightOptions2}
-              style={{ width: "35em" }}
+              style={{ width: "35vw" }}
             />
           </Card>
         </div>
@@ -196,29 +192,30 @@ const PantallaInicial = ({ authorized }) => {
       
       <div style={{ display: "flex", justifyContent: 'center' }}>
         <div>
-          <Card style={{ textAlign: 'center', marginLeft: '10%', display: "flex", justifyContent: 'center' }}>
+          <div style={{ textAlign: 'center', marginLeft: '10%', display: "flex", justifyContent: 'center' }}>
             <StlViewer
               style={{
                 top: 0,
                 left: 0,
-                width: '35em',
-                height: '33em'
+                width: '40vw',
+                height: '35vw',
+               
               }}
               orbitControls
               shadows
               modelProps={{ color: 'blue' }}
               url={`http://84.127.70.11:8000/uploads/${window.localStorage.getItem('lastmodel1')}`}
             />
-          </Card>
+          </div>
         </div>
         <div>
-          <Card style={{ textAlign: 'center', marginLeft: '10%', display: "flex", justifyContent: 'center' }}>
+          <div style={{ textAlign: 'center', marginLeft: '10%', display: "flex", justifyContent: 'center' }}>
             <StlViewer
               style={{
                 top: 0,
                 left: 0,
-                width: '35em',
-                height: '33em'
+                width: '40vw',
+                height: '35vw'
               }}
               orbitControls
               shadows
@@ -227,7 +224,7 @@ const PantallaInicial = ({ authorized }) => {
               url={`http://84.127.70.11:8000/uploads/${window.localStorage.getItem('lastmodel2')}`}
               
             />
-          </Card>
+          </div>
         </div>
       </div>
     </>

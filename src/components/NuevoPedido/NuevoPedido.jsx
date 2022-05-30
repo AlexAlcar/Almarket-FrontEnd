@@ -107,6 +107,7 @@ const NuevoPedido = ({ verNuevoPedido, impresorElegido, setverNuevoPedido }) => 
     else if (!nuevoPedido.tamanyo) chequeoDatos("Debes elegir un tamaño mínimo");
     else if (!nuevoPedido.color) chequeoDatos("Debes elegir un color");
     else if (!nuevoPedido.fichero) chequeoDatos("Debes subir un modelo antes de crear el pedido");
+    //else if (nuevoPedido.fecha_entrega<new date())chequeoDatos("No puedes elegir una fecha anterior al dia de hoy");
     else crearPedido();
     //console.log("Fichero: ", fichero);
     console.log("Impresor elegido: ", impresorElegido);
@@ -228,6 +229,7 @@ const NuevoPedido = ({ verNuevoPedido, impresorElegido, setverNuevoPedido }) => 
               <label htmlFor="date">Fecha Máxima:</label>
               <Calendar
                 style={{ width: "200px" }}
+                minDate={new Date()}
                 id="spanish"
                 onChange={(e) =>
                   setNuevoPedido({ ...nuevoPedido, fecha_entrega: e.value.toLocaleString() })
@@ -271,7 +273,7 @@ const NuevoPedido = ({ verNuevoPedido, impresorElegido, setverNuevoPedido }) => 
                           setFicheroSubido(true);
                         }}
                         accept=".stl"
-                        maxFileSize={10000000}
+                        maxFileSize={100000000}
                       />
                     </>
                   )}
