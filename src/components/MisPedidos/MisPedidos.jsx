@@ -91,7 +91,7 @@ const MisPedidos = () => {
     return rowData.tamanyo + " cm³";
   };
   const precioTemplate = (rowData) => {
-    return rowData.tamanyo + " €";
+    return rowData.precioTotal + " €";
   };
   const fEntregaTemplate = (rowData) => {
     return rowData.fecha_entrega.split(",", 1);
